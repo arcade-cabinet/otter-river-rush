@@ -1,80 +1,54 @@
-import React, { useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
-import { Mesh } from 'three';
+import React from 'react';
+import { AdvancedWater, Rain } from '@jbcom/strata';
 import { useBiome } from '../../ecs/biome-system';
 import { useGameStore } from '../../hooks/useGameStore';
 
+/**
+ * Water Effects using @jbcom/strata AdvancedWater
+ * Provides advanced water rendering with caustics, foam, and reflections
+ */
 export function WaterEffects(): React.JSX.Element | null {
-  const meshRef = useRef<Mesh>(null);
   const { status } = useGameStore();
   const biome = useBiome();
 
   // Biome-specific water colors
-  const waterColors = {
-    forest: [0.1, 0.3, 0.5], // Deep blue-green
-    mountain: [0.15, 0.4, 0.7], // Clear mountain water
-    canyon: [0.2, 0.3, 0.4], // Murky desert water
-    rapids: [0.05, 0.2, 0.4], // Dark turbulent water
+  const waterColors: Record<string, string> = {
+    'Forest Stream': '#1a4a6e',
+    'Mountain Rapids': '#2668a0',
+    'Canyon River': '#3a5a6e',
+    'Crystal Falls': '#1a8a8a',
   };
 
-  const waterColor = waterColors[biome.name as keyof typeof waterColors] || [
-    0.1, 0.2, 0.7,
-  ];
+  const waterColor = waterColors[biome.name] || '#1e40af';
 
-  useFrame((_, dt) => {
-    if (!meshRef.current || status !== 'playing') return;
+  // Show rain in rapids biome
+  const showRain = biome.name === 'Mountain Rapids';
 
-    // Animate water
-    const material = meshRef.current.material as {
-      uniforms?: { time: { value: number } };
-    };
-    if (material.uniforms) {
-      material.uniforms.time.value += dt;
-    }
-  });
+  // Wave speed based on game state
+  const waveSpeed = status === 'playing' ? 1.5 : 0.5;
 
   return (
-    <mesh
-      ref={meshRef}
-      position={[0, -0.5, -1]}
-      rotation={[-Math.PI / 2, 0, 0]}
-    >
-      <planeGeometry args={[20, 30, 32, 32]} />
-      <shaderMaterial
-        uniforms={{
-          time: { value: 0 },
-          color: { value: waterColor },
-        }}
-        vertexShader={`
-          uniform float time;
-          varying vec2 vUv;
-          varying float vWave;
-          
-          void main() {
-            vUv = uv;
-            vec3 pos = position;
-            
-            float wave1 = sin(pos.x * 2.0 + time) * 0.1;
-            float wave2 = sin(pos.y * 3.0 + time * 0.5) * 0.05;
-            pos.z += wave1 + wave2;
-            
-            vWave = wave1 + wave2;
-            
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-          }
-        `}
-        fragmentShader={`
-          uniform vec3 color;
-          varying vec2 vUv;
-          varying float vWave;
-          
-          void main() {
-            vec3 waterColor = color + vec3(vWave * 0.2);
-            gl_FragColor = vec4(waterColor, 0.9);
-          }
-        `}
-        transparent
+    <group>
+      <AdvancedWater
+        position={[0, -0.3, -5]}
+        size={[40, 60]}
+        segments={64}
+        color={waterColor}
+        waveHeight={0.08}
+        waveSpeed={waveSpeed}
+        causticIntensity={0.3}
       />
-    </mesh>
+
+      {/* Weather effects for rapids biome */}
+      {showRain && (
+        <Rain
+          count={500}
+          areaSize={40}
+          height={20}
+          intensity={0.6}
+          dropLength={0.5}
+        />
+      )}
+    </group>
   );
 }

@@ -1,31 +1,13 @@
-import React, { useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
-import { Mesh } from 'three';
+import React from 'react';
+import { ProceduralSky, createTimeOfDay } from '@jbcom/strata';
 
 /**
- * Background Component - Scrolling water background
- * Converts BackgroundGenerator to React Three Fiber
+ * Background Component using @jbcom/strata
+ * Provides procedural sky background for the game
  */
-
 export function Background(): React.JSX.Element {
-  const meshRef = useRef<Mesh>(null);
+  // Create noon time of day settings
+  const timeOfDay = createTimeOfDay(12);
 
-  useFrame((state, delta) => {
-    if (!meshRef.current) return;
-
-    // Scroll the background
-    meshRef.current.position.y -= delta * 2;
-
-    // Reset position for infinite scroll
-    if (meshRef.current.position.y < -10) {
-      meshRef.current.position.y = 0;
-    }
-  });
-
-  return (
-    <mesh ref={meshRef} position={[0, 0, -1]}>
-      <planeGeometry args={[20, 20]} />
-      <meshBasicMaterial color="#1e3a8a" />
-    </mesh>
-  );
+  return <ProceduralSky timeOfDay={timeOfDay} />;
 }

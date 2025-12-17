@@ -1,36 +1,38 @@
-import { useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
-import { Mesh } from 'three';
+import React from 'react';
+import { Water } from '@jbcom/strata';
 import { useGameStore } from '../../hooks/useGameStore';
+import { useBiome } from '../../ecs/biome-system';
 
-export function River() {
-  const meshRef = useRef<Mesh>(null);
+/**
+ * River Component using @jbcom/strata Water
+ * Provides animated water surface with reflections and flow
+ */
+export function River(): React.JSX.Element {
   const { status } = useGameStore();
+  const biome = useBiome();
 
-  useFrame((_, dt) => {
-    if (!meshRef.current || status !== 'playing') return;
+  // Biome-specific water colors
+  const biomeWaterColors: Record<string, string> = {
+    'Forest Stream': '#1e5a8a',
+    'Mountain Rapids': '#2a6a9a',
+    'Canyon River': '#3a7aaa',
+    'Crystal Falls': '#1ecfcf',
+  };
 
-    // Scroll water texture
-    if (meshRef.current.material) {
-      const material = Array.isArray(meshRef.current.material) 
-        ? meshRef.current.material[0] 
-        : meshRef.current.material;
-      
-      if (material && 'map' in material) {
-        const mat = material as {
-          map?: { offset: { y: number } };
-        };
-        if (mat.map) {
-          mat.map.offset.y += dt * 0.5;
-        }
-      }
-    }
-  });
+  const waterColor = biomeWaterColors[biome.name] || '#1e40af';
+
+  // Wave speed based on game state
+  const waveSpeed = status === 'playing' ? 1.0 : 0.3;
 
   return (
-    <mesh ref={meshRef} position={[0, 0, -1]} rotation={[-Math.PI / 2, 0, 0]}>
-      <planeGeometry args={[20, 30]} />
-      <meshStandardMaterial color="#1e40af" metalness={0.3} roughness={0.7} />
-    </mesh>
+    <Water
+      position={[0, -0.1, -5]}
+      size={40}
+      segments={64}
+      color={waterColor}
+      waveSpeed={waveSpeed}
+      waveHeight={0.05}
+      opacity={0.9}
+    />
   );
 }
