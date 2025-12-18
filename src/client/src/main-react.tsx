@@ -2,6 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './components/App';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { GameSettingsProvider } from './contexts/GameSettingsContext';
 import './style.css';
 
 /**
@@ -18,10 +19,15 @@ if (!rootElement) {
 
 const root = createRoot(rootElement);
 
+// In dev mode, show debug stats
+const showStats = import.meta.env.DEV;
+
 root.render(
   <StrictMode>
     <ErrorBoundary>
-      <App />
+      <GameSettingsProvider settings={{ showStats }}>
+        <App />
+      </GameSettingsProvider>
     </ErrorBoundary>
   </StrictMode>
 );
