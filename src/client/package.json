@@ -36,7 +36,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "build:lib": "tsc --declaration --emitDeclarationOnly && vite build --mode lib",
+    "build:lib": "tsc --declaration --emitDeclarationOnly --outDir dist && vite build --config vite.config.lib.ts",
     "preview": "vite preview",
     "test": "vitest",
     "test:e2e": "playwright test",

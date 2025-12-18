@@ -24,10 +24,7 @@ export function WaterEffects(): React.JSX.Element | null {
   const constraints = useMobileConstraints();
 
   // Get biome config from centralized config (memoized to avoid recalculation)
-  const biomeConfig = useMemo(
-    () => getBiomeConfig(biome.name),
-    [biome.name]
-  );
+  const biomeConfig = useMemo(() => getBiomeConfig(biome.name), [biome.name]);
   const waterColor = biomeConfig.deepWaterColor;
   const showRain = biomeConfig.hasRain;
   const rainIntensity = biomeConfig.rainIntensity;

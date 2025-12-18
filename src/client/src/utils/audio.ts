@@ -14,10 +14,38 @@ export type SoundId =
   | 'collect-gem'
   | 'hit';
 
+/**
+ * Audio file path type for type-safe audio file references.
+ * All audio files should be in .ogg format for best browser compatibility.
+ */
+export type AudioFilePath =
+  `audio/${'sfx' | 'ambient' | 'music'}/${string}.ogg`;
+
+/**
+ * Sound configuration with typed path
+ */
+interface SoundConfig {
+  id: SoundId;
+  path: AudioFilePath;
+  volume: number;
+}
+
+/**
+ * Predefined sound configurations for the game
+ */
+const SOUND_CONFIGS: SoundConfig[] = [
+  { id: 'ui-click', path: 'audio/sfx/ui-click.ogg', volume: 0.5 },
+  { id: 'jump', path: 'audio/sfx/jump.ogg', volume: 0.6 },
+  { id: 'dodge', path: 'audio/sfx/woosh4.ogg', volume: 0.4 },
+  { id: 'collect-coin', path: 'audio/sfx/collect-coin.ogg', volume: 0.7 },
+  { id: 'collect-gem', path: 'audio/sfx/collect-gem.ogg', volume: 0.8 },
+  { id: 'hit', path: 'audio/sfx/hit.ogg', volume: 0.9 },
+];
+
 // Sound effect registry
 const sounds: Record<SoundId, Howl> = {} as Record<SoundId, Howl>;
 
-// Audio enabled state (user must interact first for mobile)
+// Audio state - user must interact first for mobile unlock
 let audioEnabled = true;
 let audioUnlocked = false;
 
@@ -96,18 +124,13 @@ export function setAudioEnabled(enabled: boolean) {
 }
 
 /**
- * Preload all game sounds
+ * Preload all game sounds using typed configurations
  */
 export function preloadSounds() {
-  // UI sounds
-  loadSound('ui-click', getAudioPath('audio/sfx/ui-click.ogg'), 0.5);
-
-  // Gameplay sounds
-  loadSound('jump', getAudioPath('audio/sfx/jump.ogg'), 0.6);
-  loadSound('dodge', getAudioPath('audio/sfx/woosh4.ogg'), 0.4);
-  loadSound('collect-coin', getAudioPath('audio/sfx/collect-coin.ogg'), 0.7);
-  loadSound('collect-gem', getAudioPath('audio/sfx/collect-gem.ogg'), 0.8);
-  loadSound('hit', getAudioPath('audio/sfx/hit.ogg'), 0.9);
+  // Load all sounds from typed configuration
+  for (const config of SOUND_CONFIGS) {
+    loadSound(config.id, getAudioPath(config.path), config.volume);
+  }
 
   console.info('🎵 Sound effects preloaded');
 }

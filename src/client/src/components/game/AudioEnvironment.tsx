@@ -42,10 +42,7 @@ export function AudioEnvironment({
   const biome = useBiome();
 
   // Get biome config from centralized config (memoized to avoid recalculation)
-  const biomeConfig = useMemo(
-    () => getBiomeConfig(biome.name),
-    [biome.name]
-  );
+  const biomeConfig = useMemo(() => getBiomeConfig(biome.name), [biome.name]);
   const ambientType = biomeConfig.ambientType;
   const isPlaying = status === 'playing';
   const hasRain = biomeConfig.hasRain;

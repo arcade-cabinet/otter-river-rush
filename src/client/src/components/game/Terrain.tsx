@@ -41,10 +41,7 @@ function TerrainMesh(): React.JSX.Element {
   const constraints = useMobileConstraints();
 
   // Get biome config from centralized config (memoized to avoid recalculation)
-  const biomeConfig = useMemo(
-    () => getBiomeConfig(biome.name),
-    [biome.name]
-  );
+  const biomeConfig = useMemo(() => getBiomeConfig(biome.name), [biome.name]);
 
   // Reduce vegetation density on mobile
   const grassCount = constraints.isPhone

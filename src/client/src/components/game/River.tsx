@@ -14,10 +14,7 @@ export function River(): React.JSX.Element {
   const biome = useBiome();
 
   // Get biome config from centralized config (memoized to avoid recalculation)
-  const biomeConfig = useMemo(
-    () => getBiomeConfig(biome.name),
-    [biome.name]
-  );
+  const biomeConfig = useMemo(() => getBiomeConfig(biome.name), [biome.name]);
   const waterColor = biomeConfig.waterColor;
 
   // Wave speed based on game state

@@ -156,7 +156,8 @@ function makeDecision(state: GameState): Decision {
           goal: 'avoid_obstacle',
           priority: 10,
         };
-      } else if (canMoveRight && !hasObstacleAt(obstaclesInPath, playerX + 2)) {
+      }
+      if (canMoveRight && !hasObstacleAt(obstaclesInPath, playerX + 2)) {
         return {
           action: 'move_right',
           goal: 'avoid_obstacle',
@@ -178,7 +179,8 @@ function makeDecision(state: GameState): Decision {
         goal: 'collect_item',
         priority: 5,
       };
-    } else if (item.position) {
+    }
+    if (item.position) {
       // Item in adjacent lane - move to collect
       if (item.position.x < playerX && playerX > -2) {
         return {
@@ -186,7 +188,8 @@ function makeDecision(state: GameState): Decision {
           goal: 'seek_collectible',
           priority: 3,
         };
-      } else if (item.position.x > playerX && playerX < 2) {
+      }
+      if (item.position.x > playerX && playerX < 2) {
         return {
           action: 'move_right',
           goal: 'seek_collectible',
@@ -205,7 +208,8 @@ function makeDecision(state: GameState): Decision {
         goal: 'center_bias',
         priority: 1,
       };
-    } else if (playerX > 0) {
+    }
+    if (playerX > 0) {
       return {
         action: 'move_left',
         goal: 'center_bias',
