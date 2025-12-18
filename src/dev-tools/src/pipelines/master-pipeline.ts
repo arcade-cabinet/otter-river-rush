@@ -14,7 +14,7 @@ import { join } from 'path';
 interface PipelineResult {
   step: string;
   status: 'success' | 'failed' | 'skipped';
-  output?: any;
+  output?: string;
   error?: string;
 }
 
@@ -40,11 +40,12 @@ class MasterPipeline {
         step: 'Content + Model Generation',
         status: 'success',
       });
-    } catch (error: any) {
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
       this.results.push({
         step: 'Content Generation',
         status: 'failed',
-        error: error.message,
+        error: message,
       });
       throw error; // Stop pipeline on content gen failure
     }
@@ -65,11 +66,12 @@ class MasterPipeline {
       await injector.injectAll();
 
       this.results.push({ step: 'Code Integration', status: 'success' });
-    } catch (error: any) {
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
       this.results.push({
         step: 'Code Integration',
         status: 'failed',
-        error: error.message,
+        error: message,
       });
     }
   }
@@ -83,7 +85,7 @@ class MasterPipeline {
         cwd: process.cwd(),
       });
       this.results.push({ step: 'Build Verification', status: 'success' });
-    } catch (_error: any) {
+    } catch {
       this.results.push({
         step: 'Build Verification',
         status: 'failed',

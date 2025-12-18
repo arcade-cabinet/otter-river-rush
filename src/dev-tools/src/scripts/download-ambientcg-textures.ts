@@ -50,7 +50,12 @@ async function downloadFile(url: string, outputPath: string): Promise<void> {
     throw new Error(`Failed to download: ${response.statusText}`);
   }
   const fileStream = createWriteStream(outputPath);
-  await pipeline(response.body as any, fileStream);
+  // Node.js fetch returns a web ReadableStream which needs to be converted
+  const { Readable } = await import('stream');
+  const nodeStream = Readable.fromWeb(
+    response.body as import('stream/web').ReadableStream
+  );
+  await pipeline(nodeStream, fileStream);
 }
 
 async function extractZip(zipPath: string, outputDir: string): Promise<void> {
@@ -104,8 +109,9 @@ async function downloadTexture(
     await fs.unlink(zipPath);
 
     spinner.succeed(`${texture.id} downloaded and extracted`);
-  } catch (error: any) {
-    spinner.fail(`Failed to download ${texture.id}: ${error.message}`);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    spinner.fail(`Failed to download ${texture.id}: ${message}`);
     throw error;
   }
 }

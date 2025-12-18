@@ -61,7 +61,10 @@ export class RetextureAPI extends MeshyBaseClient {
    */
   async createRetextureTask(
     params: RetextureTaskParams,
-    makeRequestWithRetry: (url: string, options: any) => Promise<any>
+    makeRequestWithRetry: (
+      url: string,
+      options: RequestInit
+    ) => Promise<{ result?: string; id?: string }>
   ): Promise<RetextureTask> {
     // Validate inputs per API docs
     if (!params.input_task_id && !params.model_url) {
@@ -74,7 +77,7 @@ export class RetextureAPI extends MeshyBaseClient {
       );
     }
 
-    const requestBody: any = {};
+    const requestBody: Record<string, string | boolean | undefined> = {};
 
     // Input: task_id or model_url
     if (params.input_task_id) {

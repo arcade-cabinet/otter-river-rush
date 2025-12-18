@@ -54,7 +54,10 @@ export class TextTo3DAPI extends MeshyBaseClient {
    */
   async createPreviewTask(
     params: CreateTaskParams,
-    makeRequestWithRetry: (url: string, options: any) => Promise<any>
+    makeRequestWithRetry: (
+      url: string,
+      options: RequestInit
+    ) => Promise<{ result?: string; id?: string }>
   ): Promise<MeshyTask> {
     const data = await makeRequestWithRetry(`${this.baseUrl}/text-to-3d`, {
       method: 'POST',
@@ -99,7 +102,10 @@ export class TextTo3DAPI extends MeshyBaseClient {
    */
   async createRefineTask(
     previewTaskId: string,
-    makeRequestWithRetry: (url: string, options: any) => Promise<any>,
+    makeRequestWithRetry: (
+      url: string,
+      options: RequestInit
+    ) => Promise<{ result?: string; id?: string }>,
     params?: {
       enable_pbr?: boolean;
       texture_prompt?: string;
@@ -208,7 +214,10 @@ export class TextTo3DAPI extends MeshyBaseClient {
   /**
    * List tasks with pagination
    */
-  async listTasks(pageNum: number = 1, pageSize: number = 100): Promise<any[]> {
+  async listTasks(
+    pageNum: number = 1,
+    pageSize: number = 100
+  ): Promise<MeshyTask[]> {
     const url = `${this.baseUrl}/text-to-3d?page_num=${pageNum}&page_size=${pageSize}`;
     const response = await fetch(url, {
       headers: {
@@ -221,6 +230,6 @@ export class TextTo3DAPI extends MeshyBaseClient {
       throw new Error(`Failed to list tasks: ${response.status} - ${error}`);
     }
 
-    return response.json();
+    return response.json() as Promise<MeshyTask[]>;
   }
 }

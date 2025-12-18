@@ -17,7 +17,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { dirname, join } from 'path';
 import sharp from 'sharp';
-import type { AssetDefinition } from './asset-manifest.js';
+import type { AssetDefinition, QualityMetrics } from './asset-manifest.js';
 
 const PUBLIC_DIR = join(process.cwd(), 'public');
 
@@ -274,7 +274,7 @@ export async function processAllAssets(
  */
 export async function processDeficientAssets(
   manifest: AssetDefinition[],
-  qualityMetrics: Map<string, any>
+  qualityMetrics: Map<string, QualityMetrics>
 ): Promise<void> {
   const deficientAssets = manifest.filter((asset) => {
     const quality = qualityMetrics.get(asset.id);

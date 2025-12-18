@@ -18,6 +18,12 @@ import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 import { CLAUDE_SONNET_4_5, DEFAULT_TEMPERATURE } from '../config/ai-constants';
 
+interface TestAttachment {
+  name: string;
+  path?: string;
+  contentType?: string;
+}
+
 interface TestFailure {
   testName: string;
   error: string;
@@ -119,7 +125,7 @@ class DiagnosticQAWorkflow {
                 file: spec.file,
                 line: spec.line,
                 screenshot: result.attachments?.find(
-                  (a: any) => a.name === 'screenshot'
+                  (a: TestAttachment) => a.name === 'screenshot'
                 )?.path,
                 logs: result.stdout || [],
               });

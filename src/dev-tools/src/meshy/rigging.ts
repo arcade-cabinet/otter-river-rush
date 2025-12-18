@@ -63,21 +63,24 @@ export class RiggingAPI extends MeshyBaseClient {
    * Returns model with basic animations (walking & running)
    */
   async createRiggingTask(params: RiggingTaskParams): Promise<RiggingTask> {
-    const data = await this.request<any>('/rigging', {
-      method: 'POST',
-      body: JSON.stringify({
-        input_task_id: params.input_task_id,
-        height_meters: params.height_meters || 1.7,
-        // Extended params (Meshy may or may not support all - graceful fallback)
-        ...(params.custom_animations && {
-          custom_animations: params.custom_animations,
+    const data = await this.request<{ result?: string; id?: string }>(
+      '/rigging',
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          input_task_id: params.input_task_id,
+          height_meters: params.height_meters || 1.7,
+          // Extended params (Meshy may or may not support all - graceful fallback)
+          ...(params.custom_animations && {
+            custom_animations: params.custom_animations,
+          }),
+          ...(params.animation_style && {
+            animation_style: params.animation_style,
+          }),
+          ...(params.fps && { fps: params.fps }),
         }),
-        ...(params.animation_style && {
-          animation_style: params.animation_style,
-        }),
-        ...(params.fps && { fps: params.fps }),
-      }),
-    });
+      }
+    );
 
     return {
       id: data.result || data.id,

@@ -7,11 +7,33 @@ import chalk from 'chalk';
 import fs from 'fs-extra';
 import path from 'path';
 import { MeshyAPI } from '../meshy/index.js';
+import type { MeshyTask } from '../meshy/text_to_3d.js';
+
+/** Represents an unmatched task from Meshy that doesn't correspond to any expected model */
+interface AlienTask {
+  id: string;
+  status: MeshyTask['status'];
+  progress?: number;
+  prompt?: string;
+  glbFilename?: string;
+}
+
+/** Represents a duplicate task that should be cleaned up */
+interface DuplicateTask {
+  id: string;
+  outputPath: string;
+  prompt?: string;
+}
+
+/** Extended Meshy task with prompt information for matching */
+interface MeshyTaskWithPrompt extends MeshyTask {
+  prompt?: string;
+}
 
 export interface CompletionStatus {
   completed: Set<string>; // Output paths that are complete
   inProgress: Map<string, string>; // Output path -> task ID
-  alien: any[]; // Tasks in Meshy not from current manifests
+  alien: AlienTask[]; // Tasks in Meshy not from current manifests
 }
 
 export class RecoveryManager {
@@ -47,8 +69,8 @@ export class RecoveryManager {
       let _matched = 0;
       let _inProgress = 0;
       let _duplicates = 0;
-      const unmatchedTasks: any[] = [];
-      const duplicateTasks: any[] = [];
+      const unmatchedTasks: AlienTask[] = [];
+      const duplicateTasks: DuplicateTask[] = [];
       const processedOutputs = new Set<string>();
 
       // Sort tasks by created_at (oldest first)
@@ -133,7 +155,9 @@ export class RecoveryManager {
       if (duplicateTasks.length > 0 && duplicateTasks.length < 20) {
         await this.cleanupDuplicates(duplicateTasks);
       }
-    } catch (_error: any) {}
+    } catch {
+      // Ignore recovery errors - just return current status
+    }
 
     return status;
   }
@@ -141,7 +165,10 @@ export class RecoveryManager {
   /**
    * Match Meshy task to expected model by prompt similarity
    */
-  private matchTaskToModel(task: any, expectedModels: string[]): string | null {
+  private matchTaskToModel(
+    task: MeshyTaskWithPrompt,
+    expectedModels: string[]
+  ): string | null {
     const taskPrompt = (task.prompt || '').toLowerCase();
 
     for (const model of expectedModels) {
@@ -193,7 +220,9 @@ export class RecoveryManager {
   /**
    * Clean up duplicate tasks
    */
-  private async cleanupDuplicates(duplicateTasks: any[]): Promise<void> {
+  private async cleanupDuplicates(
+    duplicateTasks: DuplicateTask[]
+  ): Promise<void> {
     let _cleanedCount = 0;
 
     for (const dup of duplicateTasks) {
