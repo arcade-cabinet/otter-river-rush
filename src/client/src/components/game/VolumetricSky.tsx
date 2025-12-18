@@ -14,6 +14,7 @@ import {
   VolumetricClouds,
 } from '@jbcom/strata';
 import type React from 'react';
+import { useMemo } from 'react';
 import { getBiomeConfig } from '../../config/biome-config';
 import { useBiome } from '../../ecs/biome-system';
 import { useMobileConstraints } from '../../hooks/useMobileConstraints';
@@ -30,8 +31,11 @@ export function VolumetricSky({
   const constraints = useMobileConstraints();
   const biome = useBiome();
 
-  // Get biome config from centralized config
-  const biomeConfig = getBiomeConfig(biome.name);
+  // Get biome config from centralized config (memoized to avoid recalculation)
+  const biomeConfig = useMemo(
+    () => getBiomeConfig(biome.name),
+    [biome.name]
+  );
   const finalCoverage = biomeConfig.cloudCoverage || coverage;
 
   // Reduce quality on mobile for performance

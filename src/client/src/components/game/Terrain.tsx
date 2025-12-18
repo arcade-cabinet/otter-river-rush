@@ -6,10 +6,16 @@
 
 import { GrassInstances, RockInstances } from '@jbcom/strata';
 import type React from 'react';
-import { Suspense } from 'react';
+import { Suspense, useMemo } from 'react';
 import { getBiomeConfig } from '../../config/biome-config';
 import { useBiome } from '../../ecs/biome-system';
 import { useMobileConstraints } from '../../hooks/useMobileConstraints';
+
+// Terrain generation constants
+const RIVER_WIDTH_THRESHOLD = 3; // Distance from center where river channel starts
+const RIVER_CHANNEL_DEPTH = 0.05; // Depth multiplier for river channel
+const BANK_ELEVATION = 0.2; // Elevation multiplier for banks
+const BASE_HEIGHT_OFFSET = -0.6; // Base terrain height offset
 
 /**
  * Simple heightmap function for terrain
@@ -18,21 +24,27 @@ import { useMobileConstraints } from '../../hooks/useMobileConstraints';
 function getTerrainHeight(x: number, z: number): number {
   // Lower in center (river channel), higher at edges
   const distFromCenter = Math.abs(x);
-  const riverChannel = distFromCenter < 3 ? 0.05 : 0.2;
+  const riverChannel =
+    distFromCenter < RIVER_WIDTH_THRESHOLD
+      ? RIVER_CHANNEL_DEPTH
+      : BANK_ELEVATION;
   // Simple noise-like variation
   const noise =
     Math.sin(x * 0.5) * 0.1 +
     Math.sin(z * 0.3) * 0.1 +
     Math.sin(x * z * 0.1) * 0.05;
-  return noise * riverChannel - 0.6;
+  return noise * riverChannel + BASE_HEIGHT_OFFSET;
 }
 
 function TerrainMesh(): React.JSX.Element {
   const biome = useBiome();
   const constraints = useMobileConstraints();
 
-  // Get biome config from centralized config
-  const biomeConfig = getBiomeConfig(biome.name);
+  // Get biome config from centralized config (memoized to avoid recalculation)
+  const biomeConfig = useMemo(
+    () => getBiomeConfig(biome.name),
+    [biome.name]
+  );
 
   // Reduce vegetation density on mobile
   const grassCount = constraints.isPhone

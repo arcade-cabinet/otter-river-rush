@@ -1,6 +1,7 @@
 import { CloudSky, EnhancedFog } from '@jbcom/strata';
 import { Bloom, EffectComposer, Vignette } from '@react-three/postprocessing';
 import type React from 'react';
+import { useMemo } from 'react';
 import { getBiomeConfig } from '../../config/biome-config';
 import { useBiome } from '../../ecs/biome-system';
 import { useGameStore } from '../../hooks/useGameStore';
@@ -13,8 +14,11 @@ export function VisualEffects(): React.JSX.Element {
   const { status } = useGameStore();
   const biome = useBiome();
 
-  // Get biome config from centralized config
-  const biomeConfig = getBiomeConfig(biome.name);
+  // Get biome config from centralized config (memoized to avoid recalculation)
+  const biomeConfig = useMemo(
+    () => getBiomeConfig(biome.name),
+    [biome.name]
+  );
   const coverage = biomeConfig.cloudCoverage;
 
   return (

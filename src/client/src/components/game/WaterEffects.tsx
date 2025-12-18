@@ -1,5 +1,6 @@
 import { AdvancedWater, Rain } from '@jbcom/strata';
 import type React from 'react';
+import { useMemo } from 'react';
 import { getBiomeConfig } from '../../config/biome-config';
 import { useBiome } from '../../ecs/biome-system';
 import { useGameStore } from '../../hooks/useGameStore';
@@ -22,8 +23,11 @@ export function WaterEffects(): React.JSX.Element | null {
   const biome = useBiome();
   const constraints = useMobileConstraints();
 
-  // Get biome config from centralized config
-  const biomeConfig = getBiomeConfig(biome.name);
+  // Get biome config from centralized config (memoized to avoid recalculation)
+  const biomeConfig = useMemo(
+    () => getBiomeConfig(biome.name),
+    [biome.name]
+  );
   const waterColor = biomeConfig.deepWaterColor;
   const showRain = biomeConfig.hasRain;
   const rainIntensity = biomeConfig.rainIntensity;

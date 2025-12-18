@@ -66,15 +66,20 @@ export function OtterRiverRush({
   // Memoize settings to avoid unnecessary re-renders
   const gameSettings = useMemo(() => ({ showStats }), [showStats]);
   // Initialize audio on mount with proper cleanup to prevent memory leaks
+  // Split into two effects: one for initialization/cleanup, one for volume changes
   useEffect(() => {
     audio.preload();
-    audio.setVolume(volume);
 
     // Cleanup audio resources on unmount to prevent memory leaks
     // This is important for embedded components that may mount/unmount multiple times
     return () => {
       audio.cleanup();
     };
+  }, []); // Empty deps - only run on mount/unmount
+
+  // Handle volume changes separately to avoid unnecessary cleanup
+  useEffect(() => {
+    audio.setVolume(volume);
   }, [volume]);
 
   // Subscribe to game events

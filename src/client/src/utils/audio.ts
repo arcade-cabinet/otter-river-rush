@@ -3,10 +3,19 @@
  * Mobile-optimized with user interaction unlock
  */
 
-import { Howl } from 'howler';
+import { Howl, Howler } from 'howler';
+
+// Sound ID type for type safety
+export type SoundId =
+  | 'ui-click'
+  | 'jump'
+  | 'dodge'
+  | 'collect-coin'
+  | 'collect-gem'
+  | 'hit';
 
 // Sound effect registry
-const sounds: Record<string, Howl> = {};
+const sounds: Record<SoundId, Howl> = {} as Record<SoundId, Howl>;
 
 // Audio enabled state (user must interact first for mobile)
 let audioEnabled = true;
@@ -36,13 +45,13 @@ export function initAudio() {
   unlockAudio.unload();
 
   audioUnlocked = true;
-  console.log('🔊 Audio system unlocked');
+  console.info('🔊 Audio system unlocked');
 }
 
 /**
  * Load a sound effect
  */
-function loadSound(id: string, src: string, volume = 1.0): Howl {
+function loadSound(id: SoundId, src: string, volume = 1.0): Howl {
   if (sounds[id]) return sounds[id];
 
   const sound = new Howl({
@@ -58,7 +67,7 @@ function loadSound(id: string, src: string, volume = 1.0): Howl {
 /**
  * Play a sound effect
  */
-export function playSound(id: string) {
+export function playSound(id: SoundId) {
   if (!audioEnabled || !audioUnlocked) return;
 
   const sound = sounds[id];
@@ -100,7 +109,7 @@ export function preloadSounds() {
   loadSound('collect-gem', getAudioPath('audio/sfx/collect-gem.ogg'), 0.8);
   loadSound('hit', getAudioPath('audio/sfx/hit.ogg'), 0.9);
 
-  console.log('🎵 Sound effects preloaded');
+  console.info('🎵 Sound effects preloaded');
 }
 
 /**
@@ -121,7 +130,7 @@ export function cleanupAudio() {
   // Reset state
   audioUnlocked = false;
 
-  console.log('🔇 Audio system cleaned up');
+  console.info('🔇 Audio system cleaned up');
 }
 
 /**
