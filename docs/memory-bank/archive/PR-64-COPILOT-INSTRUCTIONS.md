@@ -11,12 +11,14 @@
 **Problem:** 3 flaky tests failed because `distance` returned 0 due to timing issues.
 
 **Solution Implemented:**
+
 - Increased polling timeout from 5s to 15s
 - Added 2s initialization wait before assertions
 - Set explicit polling intervals (1s for distance checks, 500ms for pause/resume)
 - Changed `>=` to `>` for stricter distance increase verification
 
 **Files Modified:**
+
 - `src/client/tests/e2e/game-flow.spec.ts` - Line 159-176 (distance tracking test)
 - `src/client/tests/e2e/complete-game-flow.spec.ts` - Lines 56-63, 162-171 (2 instances)
 
@@ -36,6 +38,7 @@ Created `src/client/tests/e2e/composition.spec.ts` with 5 comprehensive tests:
 ### 3. Browser Verification with Playwright MCP Server ✅
 
 **Executed Real Browser Tests:**
+
 - ✅ Loaded game at http://localhost:4173/otter-river-rush/
 - ✅ Verified menu displays correctly with all 4 game modes
 - ✅ Started Rapid Rush mode successfully
@@ -49,6 +52,7 @@ Created `src/client/tests/e2e/composition.spec.ts` with 5 comprehensive tests:
 - ✅ Captured screenshot: https://github.com/user-attachments/assets/72b330dc-636e-4215-bf1c-0ccfa849ff5b
 
 **Visual Verification:**
+
 - No white boxes present
 - All UI elements properly positioned
 - Canvas fills viewport correctly
@@ -57,12 +61,14 @@ Created `src/client/tests/e2e/composition.spec.ts` with 5 comprehensive tests:
 ### 4. Test Infrastructure Status ✅
 
 **Current Test Results:**
+
 - CI test subset: 17 tests (game-flow|complete-game)
 - Expected pass rate: ~94-100% with robust polling
 - Distance tracking: Fixed with 15s timeout
 - Composition tests: 5 new visual validation tests
 
 **Test Execution:**
+
 - Build successful (1.59 MB bundle, optimized)
 - Playwright installed and configured
 - Preview server working correctly
@@ -88,15 +94,17 @@ Created `src/client/tests/e2e/composition.spec.ts` with 5 comprehensive tests:
 ### Distance Tracking Fix Pattern
 
 **Before (Flaky):**
+
 ```typescript
 await page.waitForTimeout(4000);
-const distance = await page.evaluate(() => 
-  window.__gameStore?.getState?.()?.distance || 0
+const distance = await page.evaluate(
+  () => window.__gameStore?.getState?.()?.distance || 0
 );
 expect(distance).toBeGreaterThan(0); // ❌ Flaky - returns 0
 ```
 
 **After (Robust):**
+
 ```typescript
 await page.waitForTimeout(2000); // Initialize
 await expect(async () => {
@@ -105,7 +113,7 @@ await expect(async () => {
   );
   expect(distance).toBeGreaterThan(0);
 }).toPass({
-  timeout: 15000,    // Wait up to 15 seconds
+  timeout: 15000, // Wait up to 15 seconds
   intervals: [1000], // Check every 1 second
 }); // ✅ Robust - polls until condition met
 ```
@@ -113,26 +121,34 @@ await expect(async () => {
 ### Composition Test Example
 
 ```typescript
-test('no layout issues - overlapping elements or white boxes', async ({ page }) => {
+test('no layout issues - overlapping elements or white boxes', async ({
+  page,
+}) => {
   await page.waitForSelector('#app', { timeout: 10000 });
-  
+
   const layoutIssues = await page.evaluate(() => {
     const canvases = document.querySelectorAll('canvas');
-    const whiteBoxes = Array.from(document.querySelectorAll('*')).filter(el => {
-      const rect = el.getBoundingClientRect();
-      const style = window.getComputedStyle(el);
-      return rect.width > 100 && rect.height > 100 && 
-             style.backgroundColor === 'rgb(255, 255, 255)' &&
-             !el.id && el.tagName !== 'CANVAS';
-    });
-    
+    const whiteBoxes = Array.from(document.querySelectorAll('*')).filter(
+      (el) => {
+        const rect = el.getBoundingClientRect();
+        const style = window.getComputedStyle(el);
+        return (
+          rect.width > 100 &&
+          rect.height > 100 &&
+          style.backgroundColor === 'rgb(255, 255, 255)' &&
+          !el.id &&
+          el.tagName !== 'CANVAS'
+        );
+      }
+    );
+
     return {
       canvasCount: canvases.length,
       whiteBoxCount: whiteBoxes.length,
       hasMultipleCanvases: canvases.length > 1,
     };
   });
-  
+
   expect(layoutIssues.canvasCount).toBe(1);
   expect(layoutIssues.whiteBoxCount).toBe(0);
   expect(layoutIssues.hasMultipleCanvases).toBe(false);
@@ -152,6 +168,7 @@ All tasks from the instructions have been completed:
 5. ✅ **Verified gameplay** - Complete playthrough: 98m distance, 2,693 score, 50 gems
 
 **Files Modified:**
+
 - `src/client/tests/e2e/game-flow.spec.ts` - Distance tracking fix
 - `src/client/tests/e2e/complete-game-flow.spec.ts` - 2 distance checks fixed
 - `src/client/tests/e2e/composition.spec.ts` - NEW: 5 visual tests
@@ -223,21 +240,22 @@ The 3 flaky tests all fail because `distance` returns 0. This is a **timing issu
 ```typescript
 // CURRENT (BROKEN) - Fixed timeout
 await page.waitForTimeout(4000);
-const distance = await page.evaluate(() => 
-  window.__gameStore?.getState?.()?.distance || 0
+const distance = await page.evaluate(
+  () => window.__gameStore?.getState?.()?.distance || 0
 );
 expect(distance).toBeGreaterThan(0); // ❌ Flaky
 
 // REQUIRED (FIX) - Poll until condition met
 await expect(async () => {
-  const distance = await page.evaluate(() => 
-    window.__gameStore?.getState?.()?.distance || 0
+  const distance = await page.evaluate(
+    () => window.__gameStore?.getState?.()?.distance || 0
   );
   expect(distance).toBeGreaterThan(0);
 }).toPass({ timeout: 10000 }); // ✅ Robust
 ```
 
 **Files to fix:**
+
 - `src/client/tests/e2e/game-flow.spec.ts` (line ~165)
 - `src/client/tests/e2e/complete-game-flow.spec.ts` (lines ~61, ~207)
 
@@ -248,28 +266,33 @@ Since E2E tests **didn't catch the white box issue**, add composition tests:
 ```typescript
 test('no layout issues - overlapping elements', async ({ page }) => {
   await page.goto('/');
-  
+
   // Wait for game to load
   await page.waitForSelector('#app', { timeout: 10000 });
-  
+
   // Check for unexpected white spaces or overlapping canvases
   const layoutIssues = await page.evaluate(() => {
     const canvases = document.querySelectorAll('canvas');
-    const whiteBoxes = Array.from(document.querySelectorAll('*')).filter(el => {
-      const rect = el.getBoundingClientRect();
-      const style = window.getComputedStyle(el);
-      return rect.width > 100 && rect.height > 100 && 
-             style.backgroundColor === 'rgb(255, 255, 255)' &&
-             !el.id; // Ignore intentional white elements
-    });
-    
+    const whiteBoxes = Array.from(document.querySelectorAll('*')).filter(
+      (el) => {
+        const rect = el.getBoundingClientRect();
+        const style = window.getComputedStyle(el);
+        return (
+          rect.width > 100 &&
+          rect.height > 100 &&
+          style.backgroundColor === 'rgb(255, 255, 255)' &&
+          !el.id
+        ); // Ignore intentional white elements
+      }
+    );
+
     return {
       canvasCount: canvases.length,
       whiteBoxCount: whiteBoxes.length,
       hasMultipleCanvases: canvases.length > 1,
     };
   });
-  
+
   expect(layoutIssues.whiteBoxCount).toBe(0);
   expect(layoutIssues.hasMultipleCanvases).toBe(false);
 });
@@ -329,7 +352,7 @@ Before marking this PR complete:
 ## TL;DR - Action Items
 
 1. **FIX** the 3 distance tracking tests (use polling, not timeouts)
-2. **RUN** tests with MCP server to get real browser verification  
+2. **RUN** tests with MCP server to get real browser verification
 3. **CAPTURE** screenshots and videos proving the game works
 4. **ADD** composition tests to catch layout issues
 5. **VERIFY** CI workflow passes

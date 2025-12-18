@@ -1,40 +1,108 @@
-# NEXT AGENT — 3-TIER COMPOSITOR INTEGRATION COMPLETE
+# NEXT AGENT — OTTER RIVER RUSH (React Three Fiber)
 
-Status: ✅ ARCHITECTURE INTEGRATED  
-Mode: Production Ready  
+Status: ✅ PRODUCTION READY
+Mode: Development
+Tech Stack: React Three Fiber + TypeScript + Miniplex ECS
 
 ---
 
-Objective
-- Fully align runtime to manifest-driven RoomKit and verify Act I loads via SceneController with numeric tests.
+## Project Overview
 
-What to do (single pass)
-1) Runtime alignment
-   - Ensure `addons/roomkit/src/SceneController.gd` composes from manifests only (no per-scene scripts).
-   - Name spawned nodes for tests: `Ground/MeshInstance3D/CollisionShape3D`, `NPCs/<id>/InteractionArea/CollisionShape3D`.
-   - Gate heavy asset scans: `AnchorResolver` respects `TEST_MODE=1`.
+Otter River Rush is a mobile-first 3D endless runner game built with React Three Fiber.
 
-2) Scene and manifest
-   - `scenes/act1/01_normal_life.manifest.json`: include `player_start`, `camera_preset`, `ground`, 1 `npc` with `interaction`, 1 `exit`.
-   - `scenes/player_selection.gd`: on Start, call `SceneController.load_room("act1/01_normal_life")`.
+### Architecture
 
-3) Tests
-   - Use gdUnit4 to load via `SceneController.load_room("act1/01_normal_life")` under `TEST_MODE=1`.
-   - Numeric asserts: camera pos/rot/projection/size, PlayerSpawn pos/scale/facing, NPC count and InteractionArea radius, exit radius.
+- **Rendering**: React Three Fiber (R3F) with Three.js
+- **State**: Zustand for global state, Miniplex for ECS
+- **3D Models**: GLB format with embedded animations
+- **Audio**: Howler.js with haptic feedback
+- **Build**: Vite + pnpm monorepo
+- **Mobile**: Capacitor for Android/iOS
 
-4) Docs + memory-bank
-   - Update `docs/architecture/frozen/MANIFEST_SCHEMA.md` and cross-refs.
-   - Update `memory-bank/AGENT_INSTRUCTIONS.md` and `memory-bank/activeContext.md`.
+### Workspace Structure
 
-Runbook
-- Instance: `cline instance new -d`
-- Task: `cline task new "Refactor & verify manifest-driven RoomKit end-to-end (runtime, manifest, tests, docs)" -m act -y`
-- Tests: `TEST_MODE=1 GODOT_BIN=/opt/homebrew/bin/godot ./addons/gdUnit4/runtest.sh -a tests/roomkit/test_01_normal_life_manifest_only.gd`
+```
+/src/client          - Game runtime (React Three Fiber app)
+/src/dev-tools       - Asset generation tools (Meshy AI, Sharp)
+```
 
-Acceptance
-- `SceneController.load_room("act1/01_normal_life")` composes correctly; all numeric assertions pass; no per-scene scripts.
+---
 
-Constraints
-- Preserve indentation (tabs vs spaces).  
-- Update docs with version headers.  
-- One commit with concise summary.
+## What to Do (Current Priorities)
+
+### 1. Platform Testing (CRITICAL)
+
+- Android APK has never been tested on real device
+- Desktop builds (Linux, macOS, Windows) need verification
+- See `.github/URGENT_TESTING_NEEDED.md` for checklist
+
+### 2. Performance Optimization
+
+- Fine-tune mobile rendering for consistent 60fps
+- Optimize 3D model LOD for mobile devices
+- Reduce bundle size where possible
+
+### 3. Content Expansion
+
+- Add more biomes, obstacles, power-ups
+- Create additional otter animations
+- Expand level pattern variety
+
+---
+
+## Development Commands
+
+```bash
+# Development
+pnpm dev              # Start dev server
+pnpm build            # Production build
+pnpm preview          # Preview production build
+
+# Testing
+pnpm test             # Unit tests (Vitest)
+pnpm test:e2e         # E2E tests (Playwright)
+
+# Code Quality
+pnpm lint             # ESLint
+pnpm type-check       # TypeScript checking
+pnpm verify           # Full verification (lint + typecheck + test)
+```
+
+---
+
+## Key Files
+
+### Game Components
+
+- `src/client/src/components/game/GameCanvas.tsx` - R3F canvas setup
+- `src/client/src/components/game/EntityRenderer.tsx` - GLB model rendering
+- `src/client/src/components/game/Terrain.tsx` - PBR terrain
+
+### ECS Systems
+
+- `src/client/src/ecs/systems.tsx` - Core ECS management
+- `src/client/src/ecs/world.ts` - Entity definitions
+
+### UI Components
+
+- `src/client/src/components/ui/MainMenu.tsx` - Game mode selection
+- `src/client/src/components/ui/GameHUD.tsx` - In-game UI
+
+---
+
+## Constraints
+
+- Mobile-first design (touch controls, responsive UI)
+- Privacy-first (local storage only, no tracking)
+- PWA-ready (offline support, installable)
+- Performance target: 30+ FPS on mid-range mobile devices
+
+---
+
+## Documentation
+
+- `README.md` - Project overview and quick start
+- `docs/ARCHITECTURE.md` - Technical architecture
+- `docs/MOBILE_FIRST_DESIGN.md` - Mobile design principles
+- `docs/TESTING.md` - Testing guide
+- `docs/memory-bank/` - Development context and history
