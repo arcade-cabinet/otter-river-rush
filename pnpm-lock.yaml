@@ -170,15 +170,6 @@ importers:
       postprocessing:
         specifier: ^6.37.8
         version: 6.38.0(three@0.181.1)
-      react:
-        specifier: ^19.2.0
-        version: 19.2.0
-      react-dom:
-        specifier: ^19.2.0
-        version: 19.2.0(react@19.2.0)
-      three:
-        specifier: ^0.181.0
-        version: 0.181.1
       yuka:
         specifier: ^0.7.8
         version: 0.7.8
@@ -225,9 +216,18 @@ importers:
       postcss:
         specifier: ^8.5.6
         version: 8.5.6
+      react:
+        specifier: ^19.2.0
+        version: 19.2.0
+      react-dom:
+        specifier: ^19.2.0
+        version: 19.2.0(react@19.2.0)
       tailwindcss:
         specifier: ^4.1.16
         version: 4.1.17
+      three:
+        specifier: ^0.181.0
+        version: 0.181.1
       typescript:
         specifier: ^5.5.0
         version: 5.9.3
