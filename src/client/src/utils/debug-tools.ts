@@ -116,7 +116,7 @@ export const debugTools = {
   },
 };
 
-// Expose to window for console access
-if (typeof window !== 'undefined') {
-  window.debug = debugTools;
+// Expose to window for console access in development mode
+if (typeof window !== 'undefined' && import.meta.env.DEV) {
+  window.__debug = debugTools;
 }

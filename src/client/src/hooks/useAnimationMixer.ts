@@ -32,26 +32,14 @@ export function useAnimationMixer(
     };
   }, [scene, animations]);
 
-  // Load additional animation clips
+  // Preload additional animation URLs (useGLTF.preload returns void, just triggers cache)
   useEffect(() => {
-    const loadAnimations = async () => {
-      for (const [name, url] of Object.entries(animationUrls)) {
-        try {
-          const result = await useGLTF.preload(url);
-          const clips = (result as { animations?: THREE.AnimationClip[] })
-            ?.animations;
-          if (clips && clips.length > 0 && mixerRef.current) {
-            const action = mixerRef.current.clipAction(clips[0]);
-            actionsRef.current.set(name, action);
-          }
-        } catch (error) {
-          console.warn(`Failed to load animation ${name}:`, error);
-        }
+    for (const url of Object.values(animationUrls)) {
+      try {
+        useGLTF.preload(url);
+      } catch (error) {
+        console.warn(`Failed to preload animation from ${url}:`, error);
       }
-    };
-
-    if (mixerRef.current) {
-      loadAnimations();
     }
   }, [animationUrls]);
 

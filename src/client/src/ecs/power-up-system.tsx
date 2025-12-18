@@ -39,13 +39,17 @@ export function PowerUpSystem() {
     if (!player || !player.collider) return;
 
     for (const powerUp of queries.powerUps) {
-      if (powerUp.collider && checkAABB(player, powerUp)) {
-        activatePowerUp(player, powerUp.powerUp!.type);
-        world.addComponent(powerUp, 'collected', true);
+      if (powerUp.collider) {
+        const playerWithCollider = player as CollidableEntity;
+        const powerUpWithCollider = powerUp as CollidableEntity;
+        if (checkAABB(playerWithCollider, powerUpWithCollider)) {
+          activatePowerUp(player, powerUp.powerUp!.type);
+          world.addComponent(powerUp, 'collected', true);
 
-        // Spawn particles
-        for (let i = 0; i < 16; i++) {
-          spawn.particle(powerUp.position.x, powerUp.position.y, '#fbbf24');
+          // Spawn particles
+          for (let i = 0; i < 16; i++) {
+            spawn.particle(powerUp.position.x, powerUp.position.y, '#fbbf24');
+          }
         }
       }
     }
@@ -124,20 +128,24 @@ function activatePowerUp(
       break;
     }
     case 'slow_motion': {
-      // Slow down obstacles
+      // Slow down obstacles - track which entities were slowed to avoid race condition
+      const slowedEntities = new Set<Entity>();
       for (const entity of queries.moving) {
         if (entity.obstacle || entity.collectible) {
           if (entity.velocity) {
             entity.velocity.y *= 0.5;
+            slowedEntities.add(entity);
           }
         }
       }
       setTimeout(() => {
-        for (const entity of queries.moving) {
+        // Only restore velocity for entities that were originally slowed
+        for (const entity of slowedEntities) {
           if (entity.velocity) {
             entity.velocity.y /= 0.5;
           }
         }
+        slowedEntities.clear();
       }, 5000);
       break;
     }

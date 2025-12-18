@@ -36,13 +36,13 @@ export class StorageManager {
           !Array.isArray(targetValue)
         ) {
           // Merge nested objects
-          (result as Record<string, unknown>)[key] = {
+          (result as unknown as Record<string, unknown>)[key] = {
             ...(targetValue as Record<string, unknown>),
             ...(sourceValue as Record<string, unknown>),
           };
         } else if (sourceValue !== undefined) {
           // Otherwise, overwrite with source value
-          (result as Record<string, unknown>)[key] = sourceValue;
+          (result as unknown as Record<string, unknown>)[key] = sourceValue;
         }
       }
     }

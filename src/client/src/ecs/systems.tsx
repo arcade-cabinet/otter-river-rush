@@ -81,27 +81,35 @@ export function CollisionSystem() {
 
     // Check obstacle collisions
     for (const obstacle of obstacleEntities) {
-      if (player.collider && checkCollision(player, obstacle)) {
-        handleObstacleHit(player, obstacle);
+      if (player.collider && obstacle.collider) {
+        const playerWithCollider = player as With<Entity, 'position' | 'collider'>;
+        const obstacleWithCollider = obstacle as With<Entity, 'position' | 'collider'>;
+        if (checkCollision(playerWithCollider, obstacleWithCollider)) {
+          handleObstacleHit(player, obstacle);
+        }
       }
     }
 
     // Check enemy collisions
     const enemies = queries.enemies || [];
     for (const enemy of enemies) {
-      if (player.collider && enemy.collider && checkCollision(player, enemy)) {
-        handleEnemyHit(player, enemy);
+      if (player.collider && enemy.collider) {
+        const playerWithCollider = player as With<Entity, 'position' | 'collider'>;
+        const enemyWithCollider = enemy as With<Entity, 'position' | 'collider'>;
+        if (checkCollision(playerWithCollider, enemyWithCollider)) {
+          handleEnemyHit(player, enemy);
+        }
       }
     }
 
     // Check collectible collisions
     for (const collectible of collectibleEntities) {
-      if (
-        player.collider &&
-        collectible.collider &&
-        checkCollision(player, collectible)
-      ) {
-        handleCollect(player, collectible);
+      if (player.collider && collectible.collider) {
+        const playerWithCollider = player as With<Entity, 'position' | 'collider'>;
+        const collectibleWithCollider = collectible as With<Entity, 'position' | 'collider'>;
+        if (checkCollision(playerWithCollider, collectibleWithCollider)) {
+          handleCollect(player, collectible);
+        }
       }
     }
   });

@@ -27,15 +27,27 @@ function getAudioPath(path: string): string {
 export function initAudio() {
   if (audioUnlocked) return;
 
-  // Unlock audio context on mobile (required by iOS/Android)
-  const unlockAudio = new Howl({
-    src: [getAudioPath('audio/sfx/ui-click.ogg')],
-    volume: 0,
-  });
-  unlockAudio.play();
-  unlockAudio.unload();
+  try {
+    // Unlock audio context on mobile (required by iOS/Android)
+    const unlockAudio = new Howl({
+      src: [getAudioPath('audio/sfx/ui-click.ogg')],
+      volume: 0,
+      onloaderror: (_id, error) => {
+        console.warn('Audio unlock failed to load:', error);
+      },
+      onplayerror: (_id, error) => {
+        console.warn('Audio unlock failed to play:', error);
+      },
+    });
+    unlockAudio.play();
+    unlockAudio.unload();
 
-  audioUnlocked = true;
+    audioUnlocked = true;
+  } catch (error) {
+    console.warn('Failed to initialize audio system:', error);
+    // Still mark as unlocked to prevent repeated attempts
+    audioUnlocked = true;
+  }
 }
 
 /**
@@ -48,6 +60,9 @@ function loadSound(id: string, src: string, volume = 1.0): Howl {
     src: [src],
     volume,
     preload: true,
+    onloaderror: (_soundId, error) => {
+      console.warn(`Failed to load sound "${id}":`, error);
+    },
   });
 
   sounds[id] = sound;

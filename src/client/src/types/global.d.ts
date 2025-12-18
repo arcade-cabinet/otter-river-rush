@@ -126,8 +126,8 @@ declare global {
   interface Window {
     /** Game store for state management */
     __gameStore?: typeof useGameStore;
-    /** Debug tools for development */
-    debug?: DebugTools;
+    /** Debug tools for development - using unique name to avoid conflict with 'debug' npm package */
+    __debug?: DebugTools;
     /** Quest system API */
     quests?: QuestsAPI;
     /** Camera shake function */
