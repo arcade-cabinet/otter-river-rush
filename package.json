@@ -15,20 +15,20 @@
     "pnpm": ">=9.0.0"
   },
   "scripts": {
-    "dev": "pnpm --filter client dev",
-    "build": "pnpm --filter client build",
-    "preview": "pnpm --filter client preview",
-    "test": "pnpm --filter client test",
-    "test:e2e": "pnpm --filter client test:e2e",
-    "lint": "pnpm --filter client lint",
-    "type-check": "pnpm --filter client type-check",
+    "dev": "pnpm --filter @jbcom/otter-river-rush dev",
+    "build": "pnpm --filter @jbcom/otter-river-rush build",
+    "preview": "pnpm --filter @jbcom/otter-river-rush preview",
+    "test": "pnpm --filter @jbcom/otter-river-rush test",
+    "test:e2e": "pnpm --filter @jbcom/otter-river-rush test:e2e",
+    "lint": "pnpm --filter @jbcom/otter-river-rush lint",
+    "type-check": "pnpm --filter @jbcom/otter-river-rush type-check",
     "generate:models": "pnpm --filter dev-tools tsx src/generators/meshy-models.ts",
     "generate:animations": "pnpm --filter dev-tools tsx src/generators/otter-animations.ts",
     "generate:textures": "pnpm --filter dev-tools generate:textures",
     "generate:sprites": "pnpm --filter dev-tools generate:sprites",
     "pipeline": "pnpm --filter dev-tools pipeline",
     "quality-check": "pnpm --filter dev-tools quality-check",
-    "verify": "pnpm --filter client lint && pnpm --filter client type-check && pnpm --filter client test -- --run"
+    "verify": "pnpm --filter @jbcom/otter-river-rush lint && pnpm --filter @jbcom/otter-river-rush type-check && pnpm --filter @jbcom/otter-river-rush test -- --run"
   },
   "build": {
     "appId": "com.ottergames.riverrush",
