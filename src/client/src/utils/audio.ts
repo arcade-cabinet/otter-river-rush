@@ -104,6 +104,27 @@ export function preloadSounds() {
 }
 
 /**
+ * Cleanup all audio resources
+ * Call on component unmount to prevent memory leaks
+ */
+export function cleanupAudio() {
+  // Unload all sounds to free memory
+  Object.values(sounds).forEach((sound) => {
+    sound.unload();
+  });
+
+  // Clear the sounds registry
+  Object.keys(sounds).forEach((key) => {
+    delete sounds[key];
+  });
+
+  // Reset state
+  audioUnlocked = false;
+
+  console.log('🔇 Audio system cleaned up');
+}
+
+/**
  * Game audio actions
  */
 export const audio = {
@@ -122,4 +143,5 @@ export const audio = {
   preload: preloadSounds,
   setVolume,
   setEnabled: setAudioEnabled,
+  cleanup: cleanupAudio,
 };

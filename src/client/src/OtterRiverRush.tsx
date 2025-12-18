@@ -38,6 +38,8 @@ export interface OtterRiverRushProps {
   onGameOver?: (score: number) => void;
   /** Callback when score changes */
   onScoreChange?: (score: number) => void;
+  /** Callback when audio initialization fails (for error handling in consuming apps) */
+  onAudioError?: (error: Error) => void;
   /** Show debug stats overlay */
   showStats?: boolean;
   /** Initial audio volume (0-1) */
@@ -56,16 +58,23 @@ export function OtterRiverRush({
   height = '100vh',
   onGameOver,
   onScoreChange,
+  onAudioError,
   showStats = false,
   volume = 0.7,
   className = '',
 }: OtterRiverRushProps): React.JSX.Element {
   // Memoize settings to avoid unnecessary re-renders
   const gameSettings = useMemo(() => ({ showStats }), [showStats]);
-  // Initialize audio on mount
+  // Initialize audio on mount with proper cleanup to prevent memory leaks
   useEffect(() => {
     audio.preload();
     audio.setVolume(volume);
+
+    // Cleanup audio resources on unmount to prevent memory leaks
+    // This is important for embedded components that may mount/unmount multiple times
+    return () => {
+      audio.cleanup();
+    };
   }, [volume]);
 
   // Subscribe to game events
@@ -95,12 +104,16 @@ export function OtterRiverRush({
   /**
    * Safely initialize audio on user interaction.
    * Wrapped in try-catch to prevent silent failures in embedded contexts.
+   * Calls onAudioError callback if provided to notify consuming apps.
    */
   const handleAudioInit = () => {
     try {
       audio.init();
     } catch (error) {
-      console.warn('[OtterRiverRush] Audio initialization failed:', error);
+      const audioError =
+        error instanceof Error ? error : new Error(String(error));
+      console.warn('[OtterRiverRush] Audio initialization failed:', audioError);
+      onAudioError?.(audioError);
     }
   };
 
