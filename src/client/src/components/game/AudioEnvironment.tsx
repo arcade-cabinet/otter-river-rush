@@ -39,7 +39,12 @@ export function AudioEnvironment({
     <AudioProvider>
       <AudioListener />
 
-      {/* Ambient background sounds based on biome */}
+      {/* Ambient background sounds based on biome
+          Expected asset structure:
+          - Ambient audio files: /public/audio/ambient/${ambientType}.ogg
+            where ambientType is from biomeConfig (e.g., "forest", "mountain", "desert", "waterfall")
+          - Weather SFX: /public/audio/sfx/rain-loop.ogg, wind-loop.ogg, thunder.ogg
+       */}
       {isPlaying && (
         <AmbientAudio
           url={`/audio/ambient/${ambientType}.ogg`}

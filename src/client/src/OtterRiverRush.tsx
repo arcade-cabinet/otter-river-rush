@@ -22,6 +22,7 @@
 
 import React, { useEffect, useMemo } from 'react';
 import { App } from './components/App';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import { GameSettingsProvider } from './contexts/GameSettingsContext';
 import { useGameStore } from './hooks/useGameStore';
 import { audio } from './utils/audio';
@@ -91,15 +92,17 @@ export function OtterRiverRush({
   };
 
   return (
-    <GameSettingsProvider settings={gameSettings}>
-      <div
-        className={`otter-river-rush-container ${className}`}
-        style={containerStyle}
-        onClick={() => audio.init()}
-      >
-        <App />
-      </div>
-    </GameSettingsProvider>
+    <ErrorBoundary>
+      <GameSettingsProvider settings={gameSettings}>
+        <div
+          className={`otter-river-rush-container ${className}`}
+          style={containerStyle}
+          onClick={() => audio.init()}
+        >
+          <App />
+        </div>
+      </GameSettingsProvider>
+    </ErrorBoundary>
   );
 }
 

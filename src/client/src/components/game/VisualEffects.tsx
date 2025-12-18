@@ -37,7 +37,7 @@ export function VisualEffects(): React.JSX.Element {
 
       {/* Strata EnhancedFog for atmospheric depth */}
       <EnhancedFog
-        color={biome.fogColor || '#87CEEB'}
+        color={biomeConfig.fogColor}
         near={10}
         far={100}
         density={0.02}

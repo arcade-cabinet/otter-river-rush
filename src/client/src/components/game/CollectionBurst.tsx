@@ -17,12 +17,17 @@ export function CollectionBurst(): React.JSX.Element {
   const nextIdRef = useRef(0);
   const timeoutIdsRef = useRef<Set<ReturnType<typeof setTimeout>>>(new Set());
 
-  // Cleanup function for removing a burst after animation
+  // Particle lifetime in seconds (used for ParticleBurst component)
+  const PARTICLE_LIFETIME = 1;
+  // Cleanup delay includes extra buffer for fade-out animation (lifetime + 500ms buffer)
+  const CLEANUP_DELAY_MS = PARTICLE_LIFETIME * 1000 + 500;
+
+  // Cleanup function for removing a burst after animation completes
   const removeBurstAfterDelay = useCallback((burstId: number) => {
     const timeoutId = setTimeout(() => {
       setBursts((prev) => prev.filter((b) => b.id !== burstId));
       timeoutIdsRef.current.delete(timeoutId);
-    }, 1500);
+    }, CLEANUP_DELAY_MS);
     timeoutIdsRef.current.add(timeoutId);
   }, []);
 
@@ -60,7 +65,7 @@ export function CollectionBurst(): React.JSX.Element {
           count={20}
           velocity={[0, 2, 0]}
           velocityVariance={[2, 2, 2]}
-          lifetime={1}
+          lifetime={PARTICLE_LIFETIME}
           startColor={burst.color}
           endColor={burst.color}
           startSize={0.1}

@@ -35,16 +35,26 @@ root.render(
 // Development mode helpers
 console.warn('🦦 Otter River Rush - React Three Fiber Edition');
 console.warn('📊 Development Mode Active');
-console.warn('🎮 Game State available at: window.__gameStore');
+console.warn(
+  '🎮 Game State: window.__gameStore | Debug Tools: window.__debugTools'
+);
+
+// Extend Window interface for game debugging
+declare global {
+  interface Window {
+    __gameStore?: typeof import('./hooks/useGameStore').useGameStore;
+    __debugTools?: typeof import('./utils/debug-tools').debugTools;
+  }
+}
 
 // Expose game store and debug tools for debugging (always, for E2E tests)
 import('./hooks/useGameStore').then(({ useGameStore }) => {
-  (window as { __gameStore?: unknown }).__gameStore = useGameStore;
+  window.__gameStore = useGameStore;
 });
 
 // Load debug tools
 import('./utils/debug-tools').then(({ debugTools }) => {
-  (window as any).debug = debugTools;
+  window.__debugTools = debugTools;
 });
 
 // Preload audio
