@@ -98,7 +98,7 @@ jobs:
           echo "Bundle size: ${BUNDLE_MB}MB" >> $GITHUB_STEP_SUMMARY
       
       - name: Upload web build artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: web-build-${{ github.sha }}
           path: dist/
@@ -193,7 +193,7 @@ jobs:
       
       - name: Upload Linux artifacts
         if: matrix.os == 'ubuntu-latest'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: desktop-linux-${{ github.sha }}
           path: |
@@ -203,7 +203,7 @@ jobs:
       
       - name: Upload macOS artifacts
         if: matrix.os == 'macos-latest'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: desktop-macos-${{ github.sha }}
           path: |
@@ -213,7 +213,7 @@ jobs:
       
       - name: Upload Windows artifacts
         if: matrix.os == 'windows-latest'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: desktop-windows-${{ github.sha }}
           path: dist-electron/*.exe
@@ -294,7 +294,7 @@ jobs:
           ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
       
       - name: Upload APK artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: android-apk-${{ github.sha }}
           path: android/app/build/outputs/apk/release/*.apk
@@ -354,7 +354,7 @@ jobs:
           BASE_URL: ${{ steps.get-url.outputs.PAGES_URL }}
       
       - name: Upload E2E report
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: e2e-web-report-${{ github.sha }}
