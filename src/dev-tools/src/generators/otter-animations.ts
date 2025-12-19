@@ -125,6 +125,7 @@ async function main() {
       }
     }
   } else {
+    // Logic for no rig task found
   }
 
   if (!rigTaskId) {
@@ -168,6 +169,7 @@ async function main() {
     }
   }
   for (const [_name, _url] of Object.entries(generatedUrls)) {
+    // Logic to handle generated URLs
   }
 }
 

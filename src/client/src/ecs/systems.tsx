@@ -144,8 +144,30 @@ export function SpawnerSystem() {
   const accumulatorMs = useRef(0);
   const fixedStepMs = 1000 / 60;
 
+  // Add safety delay after start before spawning obstacles
+  // This prevents immediate death if game starts during lag spike or load
+  const startTimeRef = useRef(0);
+
   useFrame((_, dt) => {
-    if (status !== 'playing') return;
+    if (status !== 'playing') {
+      startTimeRef.current = 0;
+      return;
+    }
+
+    // Initialize start time when game starts
+    if (startTimeRef.current === 0) {
+      startTimeRef.current = performance.now();
+      // Reset spawn timers so we don't spawn immediately
+      lastObstacleSpawn.current = performance.now();
+      lastCollectibleSpawn.current = performance.now();
+    }
+
+    // Grace period (e.g. 1.5s) where NO obstacles spawn
+    // Critical for mobile loading / smoke tests
+    if (performance.now() - startTimeRef.current < 1500) {
+      return;
+    }
+
     accumulatorMs.current += dt * 1000;
     while (accumulatorMs.current >= fixedStepMs) {
       const now = performance.now();

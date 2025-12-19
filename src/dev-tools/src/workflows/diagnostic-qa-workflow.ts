@@ -266,6 +266,7 @@ Respond in this JSON format:
 
     if (remainingDiagnostics.length > 0) {
       for (const _diagnostic of remainingDiagnostics) {
+        // Handle remaining diagnostics
       }
     }
 

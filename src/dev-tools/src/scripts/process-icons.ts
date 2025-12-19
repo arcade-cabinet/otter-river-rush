@@ -195,13 +195,13 @@ async function optimizeExistingImages(): Promise<void> {
 
       writeFileSync(fullPath, buffer);
 
-      const newSize = buffer.length;
-      const savings = Math.round(
-        ((originalSize - newSize) / originalSize) * 100
-      );
+      // const newSize = buffer.length;
+      // const savings = Math.round(
+      //   ((originalSize - newSize) / originalSize) * 100
+      // );
 
-      if (savings > 5) {
-      }
+      // if (savings > 5) {
+      // }
     } catch (error) {
       console.error(`   ❌ Failed to optimize ${imagePath}:`, error);
     }

@@ -109,5 +109,8 @@
     "*": [
       "biome check --write --no-errors-on-unmatched --diagnostic-level=error"
     ]
+  },
+  "dependencies": {
+    "@jbcom/strata": "^1.4.4"
   }
 }

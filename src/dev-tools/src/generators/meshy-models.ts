@@ -340,6 +340,7 @@ async function syncFromManifest(manifestPath: string): Promise<void> {
     // Check main model file
     const modelPath = path.join(OUTPUT_DIR, path.basename(model.files.glb));
     if (!(await fs.pathExists(modelPath))) {
+      // Logic for missing model file
     }
 
     // Check animation files
@@ -373,7 +374,9 @@ async function syncFromManifest(manifestPath: string): Promise<void> {
   }
 
   if (downloaded > 0) {
+    // Logic for successful downloads
   } else {
+    // Logic for no downloads
   }
 }
 

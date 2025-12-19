@@ -57,7 +57,9 @@ test.describe('AI Player Persona - Autonomous Gameplay', () => {
       } else if (decision.action === 'move_right') {
         await page.keyboard.press('ArrowRight');
       } else if (decision.action === 'collect') {
+        // Collect logic
       } else {
+        // Default action
       }
 
       await page.waitForTimeout(decisionInterval);

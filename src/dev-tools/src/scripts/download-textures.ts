@@ -60,6 +60,7 @@ async function _downloadTexture(config: TextureConfig): Promise<void> {
 
 async function main() {
   for (const _config of TEXTURES) {
+    // Texture download logic removed as it's handled by download-ambientcg-textures.ts
   }
 }
 

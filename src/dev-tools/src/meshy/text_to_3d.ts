@@ -183,8 +183,8 @@ export class TextTo3DAPI extends MeshyBaseClient {
         throw new Error(`Task ${taskId} failed with status: ${task.status}`);
       }
 
-      if (task.progress !== undefined) {
-      }
+      // if (task.progress !== undefined) {
+      // }
 
       await new Promise((resolve) => setTimeout(resolve, intervalMs));
     }
