@@ -146,18 +146,19 @@ export function SpawnerSystem() {
 
   // Add safety delay after start before spawning obstacles
   // This prevents immediate death if game starts during lag spike or load
-  const startTimeRef = useRef(0);
+  // Uses null for semantic clarity (null = not started, number = started at timestamp)
+  const startTimeRef = useRef<number | null>(null);
 
   useFrame((_, dt) => {
     const now = performance.now();
 
     if (status !== 'playing') {
-      startTimeRef.current = 0;
+      startTimeRef.current = null;
       return;
     }
 
     // Initialize start time when game starts
-    if (startTimeRef.current === 0) {
+    if (startTimeRef.current === null) {
       startTimeRef.current = now;
       // Reset spawn timers so we don't spawn immediately
       lastObstacleSpawn.current = now;

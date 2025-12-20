@@ -7,10 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      '@jbcom/strata':
-        specifier: ^1.4.4
-        version: 1.4.4(@react-three/drei@10.7.7(@react-three/fiber@9.4.0(@types/react@19.2.7)(immer@11.0.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(three@0.181.2))(@types/react@19.2.7)(@types/three@0.181.0)(immer@11.0.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(three@0.181.2))(@react-three/fiber@9.4.0(@types/react@19.2.7)(immer@11.0.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(three@0.181.2))(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(@types/three@0.181.0)(postprocessing@6.38.0(three@0.181.2))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(three@0.181.2)(yuka@0.7.8)(zustand@5.0.8(@types/react@19.2.7)(immer@11.0.1)(react@19.2.0)(use-sync-external-store@1.6.0(react@19.2.0)))
     devDependencies:
       '@ai-sdk/anthropic':
         specifier: ^2.0.56
@@ -135,6 +131,9 @@ importers:
 
   src/client:
     dependencies:
+      '@jbcom/strata':
+        specifier: ^1.4.7
+        version: 1.4.7(@react-three/drei@10.7.7(@react-three/fiber@9.4.0(@types/react@19.2.7)(immer@11.0.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(three@0.181.2))(@types/react@19.2.7)(@types/three@0.181.0)(immer@11.0.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(three@0.181.2))(@react-three/fiber@9.4.0(@types/react@19.2.7)(immer@11.0.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(three@0.181.2))(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(@types/three@0.181.0)(postprocessing@6.38.0(three@0.181.2))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(three@0.181.2)(yuka@0.7.8)(zustand@5.0.8(@types/react@19.2.7)(immer@11.0.1)(react@19.2.0)(use-sync-external-store@1.6.0(react@19.2.0)))
       '@react-three/drei':
         specifier: ^10.7.6
         version: 10.7.7(@react-three/fiber@9.4.0(@types/react@19.2.7)(immer@11.0.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(three@0.181.2))(@types/react@19.2.7)(@types/three@0.181.0)(immer@11.0.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(three@0.181.2)
@@ -1539,8 +1538,8 @@ packages:
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
     engines: {node: '>=12'}
 
-  '@jbcom/strata@1.4.4':
-    resolution: {integrity: sha512-oNggIJ9Cb3o6JnB8Gkbn2QYLFReZtzAoc9ICmIGGRthmvWYaSRJ0W2hUThecJDtHaJkvvjgYLEf+3HsizIR1Xw==}
+  '@jbcom/strata@1.4.7':
+    resolution: {integrity: sha512-rjrNZFFB8CtnkUGqkoKtACs1/aVa+Rkz9KL6DcC7ym0i1SdVZAgBEoy5qpyXPTjffYB/g7kJfOhHeXc4A7PPmw==}
     peerDependencies:
       '@react-three/drei': '>=9.0.0'
       '@react-three/fiber': '>=8.0.0'
@@ -6765,7 +6764,7 @@ snapshots:
       wrap-ansi: 8.1.0
       wrap-ansi-cjs: wrap-ansi@7.0.0
 
-  '@jbcom/strata@1.4.4(@react-three/drei@10.7.7(@react-three/fiber@9.4.0(@types/react@19.2.7)(immer@11.0.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(three@0.181.2))(@types/react@19.2.7)(@types/three@0.181.0)(immer@11.0.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(three@0.181.2))(@react-three/fiber@9.4.0(@types/react@19.2.7)(immer@11.0.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(three@0.181.2))(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(@types/three@0.181.0)(postprocessing@6.38.0(three@0.181.2))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(three@0.181.2)(yuka@0.7.8)(zustand@5.0.8(@types/react@19.2.7)(immer@11.0.1)(react@19.2.0)(use-sync-external-store@1.6.0(react@19.2.0)))':
+  '@jbcom/strata@1.4.7(@react-three/drei@10.7.7(@react-three/fiber@9.4.0(@types/react@19.2.7)(immer@11.0.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(three@0.181.2))(@types/react@19.2.7)(@types/three@0.181.0)(immer@11.0.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(three@0.181.2))(@react-three/fiber@9.4.0(@types/react@19.2.7)(immer@11.0.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(three@0.181.2))(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(@types/three@0.181.0)(postprocessing@6.38.0(three@0.181.2))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(three@0.181.2)(yuka@0.7.8)(zustand@5.0.8(@types/react@19.2.7)(immer@11.0.1)(react@19.2.0)(use-sync-external-store@1.6.0(react@19.2.0)))':
     dependencies:
       '@react-three/drei': 10.7.7(@react-three/fiber@9.4.0(@types/react@19.2.7)(immer@11.0.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(three@0.181.2))(@types/react@19.2.7)(@types/three@0.181.0)(immer@11.0.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(three@0.181.2)
       '@react-three/fiber': 9.4.0(@types/react@19.2.7)(immer@11.0.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(three@0.181.2)
