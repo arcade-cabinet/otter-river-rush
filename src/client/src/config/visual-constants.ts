@@ -125,6 +125,8 @@ export const PHYSICS = {
     obstacles: 2, // Spawn rock every 2 seconds
     collectibles: 3, // Spawn coin/gem every 3 seconds
   },
+  /** Grace period before spawning obstacles (ms) - critical for mobile loading */
+  spawnGracePeriodMs: 1500,
 } as const;
 
 /**

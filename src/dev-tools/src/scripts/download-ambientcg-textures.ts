@@ -36,14 +36,6 @@ const TEXTURES_TO_DOWNLOAD = [
 
 const OUTPUT_DIR = join(process.cwd(), 'src/client/public/textures');
 
-interface TextureDownload {
-  id: string;
-  resolution: string;
-  format: string;
-  url: string;
-  outputPath: string;
-}
-
 async function downloadFile(url: string, outputPath: string): Promise<void> {
   const response = await fetch(url);
   if (!response.ok || !response.body) {

@@ -6,12 +6,6 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
-interface InjectionTarget {
-  file: string;
-  additions: string[];
-  location: 'imports' | 'types' | 'queries' | 'render';
-}
-
 export class CodeInjector {
   /**
    * Auto-wire enemy types into Entity definition
@@ -46,6 +40,7 @@ export class CodeInjector {
 
       writeFileSync(worldPath, content);
     } else {
+      console.warn('queries.enemies already exists or file structure changed');
     }
 
     // Check if queries.enemies exists
@@ -60,6 +55,7 @@ export class CodeInjector {
 
       writeFileSync(worldPath, content);
     } else {
+      console.warn('enemy component already exists or file structure changed');
     }
   }
 
@@ -96,6 +92,7 @@ export class CodeInjector {
 
       writeFileSync(canvasPath, content);
     } else {
+      console.warn('GameCanvas already updated');
     }
   }
 
@@ -152,6 +149,7 @@ export function EnemiesRenderer() {
 
       writeFileSync(rendererPath, content);
     } else {
+      console.warn('EntityRenderer already updated');
     }
   }
 
@@ -227,6 +225,7 @@ function handleEnemyHit(
 
       writeFileSync(systemsPath, content);
     } else {
+      console.warn('Systems already updated');
     }
   }
 

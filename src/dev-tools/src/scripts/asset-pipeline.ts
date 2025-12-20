@@ -29,6 +29,7 @@ async function main() {
   ).length;
 
   if (deficientCount === 0) {
+    console.log('✅ No deficient assets found');
   } else {
     await processDeficientAssets(ASSET_MANIFEST, initialQuality);
 
@@ -56,10 +57,12 @@ async function main() {
         const quality = finalQuality.get(asset.id);
         if (quality?.needsRegeneration) {
           if (asset.canBeGenerated && asset.aiPrompt) {
+            // Regeneration logic would go here
           }
         }
       });
     } else {
+      console.log('✅ No re-regeneration needed');
     }
   }
 }

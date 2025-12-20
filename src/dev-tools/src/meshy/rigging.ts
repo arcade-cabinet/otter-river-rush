@@ -113,9 +113,6 @@ export class RiggingAPI extends MeshyBaseClient {
         throw new Error(`Rigging task ${taskId} failed: ${task.status}`);
       }
 
-      if (task.progress !== undefined) {
-      }
-
       await new Promise((resolve) => setTimeout(resolve, intervalMs));
     }
 

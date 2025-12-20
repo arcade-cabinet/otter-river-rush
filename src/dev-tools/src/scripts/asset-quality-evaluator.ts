@@ -228,13 +228,17 @@ export async function evaluateAllAssets(
           : '❌';
 
     if (quality.hasWhiteBackground) {
+      // White background detected
     }
 
     if (quality.issues.length > 0) {
-      quality.issues.forEach((issue) => {});
+      quality.issues.forEach((_issue) => {
+        // Log issue
+      });
     }
 
     if (quality.needsRegeneration) {
+      // Regeneration needed
     }
   }
 
@@ -307,7 +311,9 @@ export function generateQualityReport(
       .filter(([_, q]) => q.needsRegeneration)
       .forEach(([id, q]) => {
         const _asset = manifest.find((a) => a.id === id);
-        q.issues.forEach((issue) => {});
+        q.issues.forEach((_issue) => {
+          // Log remaining issues
+        });
       });
   }
 }

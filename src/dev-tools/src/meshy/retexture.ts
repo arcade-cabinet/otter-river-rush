@@ -152,9 +152,6 @@ export class RetextureAPI extends MeshyBaseClient {
         throw new Error(`Retexture task ${taskId} failed: ${task.status}`);
       }
 
-      if (task.progress !== undefined) {
-      }
-
       await new Promise((resolve) => setTimeout(resolve, intervalMs));
     }
 
