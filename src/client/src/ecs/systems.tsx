@@ -8,6 +8,7 @@ import { With } from 'miniplex';
 import { useRef } from 'react';
 import { getLaneX, PHYSICS, VISUAL } from '../config/visual-constants';
 import { useGameStore } from '../hooks/useGameStore';
+import { detectDeviceType } from '../hooks/useMobileConstraints';
 import { audio } from '../utils/audio';
 import { type Entity, queries, spawn, world } from './world';
 
@@ -303,7 +304,10 @@ function handleEnemyHit(
 
   world.addComponent(enemy, 'destroyed', true);
 
-  for (let i = 0; i < 12; i++) {
+  const { isPhone } = detectDeviceType();
+  const particleCount = isPhone ? 4 : 12;
+
+  for (let i = 0; i < particleCount; i++) {
     spawn.particle(enemy.position.x, enemy.position.y, '#ff0000');
   }
 }
@@ -346,7 +350,10 @@ function handleObstacleHit(
   world.addComponent(obstacle, 'destroyed', true);
 
   // Spawn particles
-  for (let i = 0; i < 8; i++) {
+  const { isPhone } = detectDeviceType();
+  const particleCount = isPhone ? 4 : 8;
+
+  for (let i = 0; i < particleCount; i++) {
     spawn.particle(obstacle.position.x, obstacle.position.y, '#ff6b6b');
   }
 }
@@ -383,9 +390,12 @@ function handleCollect(
   world.addComponent(collectible, 'collected', true);
 
   // Spawn particles
+  const { isPhone } = detectDeviceType();
+  const particleCount = isPhone ? 6 : 12;
+
   const color =
     collectible.collectible!.type === 'coin' ? '#ffd700' : '#ff1493';
-  for (let i = 0; i < 12; i++) {
+  for (let i = 0; i < particleCount; i++) {
     spawn.particle(collectible.position.x, collectible.position.y, color);
   }
 }

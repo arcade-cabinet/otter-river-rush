@@ -47,7 +47,7 @@ const detectNotch = (): boolean => {
   return topInset > 20; // iPhone X+ has ~44px top inset
 };
 
-const detectDeviceType = (): { isPhone: boolean; isTablet: boolean } => {
+export const detectDeviceType = (): { isPhone: boolean; isTablet: boolean } => {
   const width = window.innerWidth;
   const height = window.innerHeight;
   const minDimension = Math.min(width, height);

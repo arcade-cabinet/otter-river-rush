@@ -1,6 +1,7 @@
 import { useFrame } from '@react-three/fiber';
 import React, { useRef } from 'react';
 import * as THREE from 'three';
+import { useMobileConstraints } from '../../hooks/useMobileConstraints';
 
 interface SmokeParticle {
   position: THREE.Vector3;
@@ -31,12 +32,16 @@ export function SmokeTrail({
   const particlesRef = useRef<SmokeParticle[]>([]);
   const groupRef = useRef<THREE.Group>(null);
   const lastEmitRef = useRef(0);
+  const constraints = useMobileConstraints();
+
+  const adjustedRate = constraints.isMobile ? rate * 2 : rate;
+  const maxParticles = constraints.isPhone ? 30 : constraints.isTablet ? 60 : 100;
 
   useFrame((state, delta) => {
     const time = state.clock.getElapsedTime();
 
     // Emit new particles
-    if (active && time - lastEmitRef.current > rate) {
+    if (active && time - lastEmitRef.current > adjustedRate) {
       lastEmitRef.current = time;
 
       const particle: SmokeParticle = {
@@ -73,8 +78,8 @@ export function SmokeTrail({
     });
 
     // Limit max particles
-    if (particlesRef.current.length > 100) {
-      particlesRef.current = particlesRef.current.slice(-100);
+    if (particlesRef.current.length > maxParticles) {
+      particlesRef.current = particlesRef.current.slice(-maxParticles);
     }
   });
 
