@@ -147,20 +147,18 @@ core
 # Electron build output
 dist-electron/
 
-# Capacitor native platforms (regenerate with: npx cap add android/ios)
-# These contain no custom native code and can be fully regenerated from capacitor.config.ts
-android/
+# Capacitor native platforms (fully configured)
+# android/
 ios/
 
-# If you DO add custom native code later, remove android/ and ios/ from above
-# and instead only ignore build artifacts:
-# android/build/
-# android/app/build/
-# android/.gradle/
-# android/local.properties
-# android/app/capacitor.build.gradle
-# android/capacitor.settings.gradle
-# android/capacitor-cordova-android-plugins/
+# Ignore Android build artifacts and generated configuration
+android/build/
+android/app/build/
+android/.gradle/
+android/local.properties
+android/app/capacitor.build.gradle
+android/capacitor.settings.gradle
+android/capacitor-cordova-android-plugins/
 # ios/build/
 # ios/Pods/
 # ios/*.xcworkspace/xcuserdata/

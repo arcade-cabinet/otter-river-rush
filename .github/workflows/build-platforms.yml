@@ -257,9 +257,6 @@ jobs:
       
       - name: Sync Capacitor (reusing web build)
         run: |
-          if [ ! -d "android" ]; then
-            npx cap add android
-          fi
           # Clear compressed files to avoid Android resource merger duplicates
           find dist -name "*.gz" -delete
           find dist -name "*.br" -delete

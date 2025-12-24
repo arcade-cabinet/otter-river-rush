@@ -150,11 +150,8 @@ jobs:
       - name: Install Android SDK components
         run: sdkmanager "platform-tools" "platforms;android-35" "build-tools;34.0.0"
       
-      - name: Capacitor add/sync
+      - name: Capacitor sync
         run: |
-          if [ ! -d "android" ]; then
-            pnpm exec cap add android
-          fi
           # Clear compressed files from public directory to avoid Android resource merger duplicates
           find src/client/public -name "*.gz" -delete
           find src/client/public -name "*.br" -delete
