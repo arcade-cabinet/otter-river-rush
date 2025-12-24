@@ -133,7 +133,7 @@ npm test                    # Run tests
 Node.js 22+, Java 17, Android SDK (for mobile)
 
 # Clone repository
-git clone https://github.com/jbcom/otter-river-rush.git
+git clone https://github.com/jbcom/nodejs-otter-river-rush.git
 cd otter-river-rush
 
 # Install dependencies
@@ -338,7 +338,7 @@ NODE_ENV=production
 
 ### GitHub Pages
 - **Build**: Automatic via GitHub Actions
-- **URL**: `https://jbcom.github.io/otter-river-rush/`
+- **URL**: `https://jbcom.github.io/nodejs-otter-river-rush/`
 - **Trigger**: Push to `main` branch
 - **Process**: Build → Deploy → Live in ~2 minutes
 

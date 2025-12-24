@@ -483,3 +483,15 @@
 - **Dependency Security**: Updated `js-yaml` to 4.1.1 to fix prototype pollution vulnerability.
 - **CI Maintenance**: Updated GitHub Actions to latest versions and pinned to exact SHAs for enhanced security.
 - **CI Fixes**: Improved Android build workflow by adding automatic Capacitor platform generation.
+### Session 2025-12-24: Showcase & Examples
+- **Examples**: Created  for developers.
+- **Showcase**: Created  with visual assets.
+- **WASM Demo**: Highlighted Rapier-powered WASM physics in .
+- **URL Fixes**: Standardized all URLs to .
+
+
+### Session 2025-12-24: Showcase & Examples
+- **Examples**: Created `examples/` for developers.
+- **Showcase**: Created `showcase/` with visual assets.
+- **WASM Demo**: Highlighted Rapier-powered WASM physics in `DEMO.md`.
+- **URL Fixes**: Standardized all URLs to `nodejs-otter-river-rush`.

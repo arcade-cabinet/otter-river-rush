@@ -87,7 +87,7 @@ Transformed from a **desktop-first web game** to a **mobile-first 3D game** opti
 **Manual Workflow**: `build-platforms.yml` for all platforms (releases)
 
 ### Production Artifacts
-- **GitHub Pages**: https://jbcom.github.io/otter-river-rush/
+- **GitHub Pages**: https://jbcom.github.io/nodejs-otter-river-rush/
 - **Android APK**: Download from Actions artifacts
 - **Local APK**: `android/app/build/outputs/apk/debug/app-debug.apk`
 
@@ -98,7 +98,7 @@ Transformed from a **desktop-first web game** to a **mobile-first 3D game** opti
 ### Web (PWA Preview)
 ```bash
 # Open in browser
-https://jbcom.github.io/otter-river-rush/
+https://jbcom.github.io/nodejs-otter-river-rush/
 
 # Or local
 pnpm --filter client preview

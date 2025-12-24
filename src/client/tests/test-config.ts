@@ -66,11 +66,11 @@ export const TEST_CONFIG = {
   urls: {
     local:
       process.env.VITE_DEV_SERVER_URL ||
-      'http://localhost:5173/otter-river-rush/',
+      'http://localhost:5173/nodejs-otter-river-rush/',
     deployed:
       process.env.BASE_URL ||
       process.env.PLAYWRIGHT_TEST_BASE_URL ||
-      'https://jbcom.github.io/otter-river-rush/',
+      'https://jbcom.github.io/nodejs-otter-river-rush/',
   },
 } as const;
 

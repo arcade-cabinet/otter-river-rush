@@ -85,7 +85,7 @@ function spawnEnemy(enemyId: string, lane: -1 | 0 | 1) {
       lastAction: 0,
     },
     model: {
-      url: `/otter-river-rush/models/enemy-${enemyId}.glb`, // Would need models
+      url: `/nodejs-otter-river-rush/models/enemy-${enemyId}.glb`, // Would need models
       scale: definition.visual.size,
     },
   });

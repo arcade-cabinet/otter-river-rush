@@ -2,16 +2,18 @@
 
 **A mobile-first 3D endless runner game built with React Three Fiber**
 
-[![CI](https://github.com/jbcom/otter-river-rush/actions/workflows/mobile-primary.yml/badge.svg)](https://github.com/jbcom/otter-river-rush/actions/workflows/mobile-primary.yml)
+[![CI](https://github.com/jbcom/nodejs-otter-river-rush/actions/workflows/mobile-primary.yml/badge.svg)](https://github.com/jbcom/nodejs-otter-river-rush/actions/workflows/mobile-primary.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ---
 
 ## 🎮 Play Now
 
-**📱 Android**: [Download APK](https://github.com/jbcom/otter-river-rush/actions) → Artifacts → `app-debug-apk`  
-**🌐 Web (PWA)**: [jbcom.github.io/otter-river-rush](https://jbcom.github.io/otter-river-rush/)  
-**🖥️ Desktop**: [Download from Releases](https://github.com/jbcom/otter-river-rush/releases)
+**📱 Android**: [Download APK](https://github.com/jbcom/nodejs-otter-river-rush/actions) → Artifacts → `app-debug-apk`  
+**🌐 Web (PWA)**: [jbcom.github.io/nodejs-otter-river-rush](https://jbcom.github.io/nodejs-otter-river-rush/)  
+**🖥️ Desktop**: [Download from Releases](https://github.com/jbcom/nodejs-otter-river-rush/releases)
+
+👉 **[View Showcase & Demo Details](./DEMO.md)**
 
 ---
 
@@ -55,7 +57,7 @@
 ### Installation
 ```bash
 # Clone repository
-git clone https://github.com/jbcom/otter-river-rush.git
+git clone https://github.com/jbcom/nodejs-otter-river-rush.git
 cd otter-river-rush
 
 # Install dependencies
@@ -122,6 +124,8 @@ pnpm exec electron-builder --dir
 
 ```
 otter-river-rush/
+├── examples/                      # Developer examples and extension guides
+├── showcase/                      # Visual assets, screenshots, and GIFs
 ├── src/
 │   ├── client/                    # Game runtime
 │   │   ├── public/

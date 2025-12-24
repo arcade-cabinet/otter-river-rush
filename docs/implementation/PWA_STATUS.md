@@ -180,12 +180,12 @@ npm run preview
   "shortcuts": [
     {
       "name": "Rapid Rush",
-      "url": "/otter-river-rush/?mode=classic",
+      "url": "/nodejs-otter-river-rush/?mode=classic",
       "icons": [{ "src": "rapid-rush-icon.png", "sizes": "96x96" }]
     },
     {
       "name": "Speed Splash",
-      "url": "/otter-river-rush/?mode=time_trial",
+      "url": "/nodejs-otter-river-rush/?mode=time_trial",
       "icons": [{ "src": "time-trial-icon.png", "sizes": "96x96" }]
     }
   ],
@@ -310,7 +310,7 @@ npm run preview
 4. Launch app from desktop/apps
 
 ### Production
-Your game at: `https://yourusername.github.io/otter-river-rush/`
+Your game at: `https://yourusername.github.io/nodejs-otter-river-rush/`
 
 **Will be installable immediately!**
 

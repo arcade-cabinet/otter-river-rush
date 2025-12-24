@@ -116,7 +116,7 @@ pnpm test:e2e --project=chromium --grep="game-flow|complete-game"
 
 **Output:**
 - Live game at: `https://[YOUR_USERNAME].github.io/[YOUR_REPO]/`
-  *(Replace placeholders with your GitHub username/organization and repository name. For example: `https://jbcom.github.io/otter-river-rush/`)*
+  *(Replace placeholders with your GitHub username/organization and repository name. For example: `https://jbcom.github.io/nodejs-otter-river-rush/`)*
 
 ## Test Results
 
@@ -289,7 +289,7 @@ The full suite includes additional tests not run in CI:
 
 1. **GitHub Pages** (Web Preview)
    - URL pattern: `https://<username>.github.io/<repo-name>/`
-     *(Replace `<username>` and `<repo-name>` with your GitHub username/organization and repository name. For example: `https://jbcom.github.io/otter-river-rush/`)*
+     *(Replace `<username>` and `<repo-name>` with your GitHub username/organization and repository name. For example: `https://jbcom.github.io/nodejs-otter-river-rush/`)*
    - Auto-deployed on every push to main
    - PWA-enabled for offline play
 
@@ -339,7 +339,7 @@ The full suite includes additional tests not run in CI:
 
 - **Workflow File:** `.github/workflows/mobile-primary.yml`
 - **Test Documentation:** `docs/TESTING.md`
-- **Actions Dashboard:** https://github.com/jbcom/otter-river-rush/actions
+- **Actions Dashboard:** https://github.com/jbcom/nodejs-otter-river-rush/actions
 - **Pages Deployment:** https://github.com/<OWNER>/<REPO>/deployments
   _(Replace `<OWNER>/<REPO>` with your repository path. This avoids hardcoding and adapts to forks, renames, or moves.)_
 

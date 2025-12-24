@@ -13,7 +13,7 @@ export function getAssetPath(path: string): string {
   const cleanPath = path.startsWith('/') ? path.slice(1) : path;
 
   // In development, base URL is typically '/'
-  // In production (GitHub Pages), it's '/otter-river-rush/'
+  // In production (GitHub Pages), it's '/nodejs-otter-river-rush/'
   const baseUrl = import.meta.env.BASE_URL || '/';
 
   // Combine base URL with path

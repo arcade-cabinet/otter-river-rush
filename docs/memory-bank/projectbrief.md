@@ -434,11 +434,11 @@ A healthy project has:
 
 ## 📞 Project Information
 
-- **Repository:** github.com/jbcom/otter-river-rush
+- **Repository:** github.com/jbcom/nodejs-otter-river-rush
 - **License:** MIT (open source)
-- **Website:** jbcom.github.io/otter-river-rush
-- **Issues:** github.com/jbcom/otter-river-rush/issues
-- **Discussions:** github.com/jbcom/otter-river-rush/discussions
+- **Website:** jbcom.github.io/nodejs-otter-river-rush
+- **Issues:** github.com/jbcom/nodejs-otter-river-rush/issues
+- **Discussions:** github.com/jbcom/nodejs-otter-river-rush/discussions
 
 ---
 

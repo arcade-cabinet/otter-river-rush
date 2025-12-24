@@ -133,7 +133,7 @@ adb install android/app/build/outputs/apk/debug/app-debug.apk
 
 ## 🎮 Play Now
 
-**Web (PWA)**: https://jbcom.github.io/otter-river-rush/  
+**Web (PWA)**: https://jbcom.github.io/nodejs-otter-river-rush/  
 **Android**: Install `app-debug.apk` on device  
 **Local Test**: `pnpm --filter client preview` → http://localhost:4173
 
@@ -183,7 +183,7 @@ Single source of truth for:
 - **Build Command**: `pnpm build`
 - **Output**: `dist/` at root
 - **Deploy**: GitHub Pages via workflow
-- **Test URL**: https://jbcom.github.io/otter-river-rush/
+- **Test URL**: https://jbcom.github.io/nodejs-otter-river-rush/
 
 ### ✅ Desktop (Ready to Test)
 - **Platforms**: Linux, macOS, Windows
@@ -486,7 +486,7 @@ npm run build         # Should succeed
 ## 📦 Build Artifacts
 
 ### Web (PWA)
-- **URL**: https://jbcom.github.io/otter-river-rush/
+- **URL**: https://jbcom.github.io/nodejs-otter-river-rush/
 - **Bundle**: 1.54 MB (411 KB gzip, 329 KB brotli)
 - **Cache**: 65 entries (41 MB) for offline
 - **Format**: Static site, GitHub Pages
@@ -521,7 +521,7 @@ adb install android/app/build/outputs/apk/debug/app-debug.apk
 ### Web (PWA)
 ```
 Open in mobile browser:
-https://jbcom.github.io/otter-river-rush/
+https://jbcom.github.io/nodejs-otter-river-rush/
 
 Tap "Install" or "Add to Home Screen"
 ```

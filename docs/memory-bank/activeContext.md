@@ -210,3 +210,21 @@
 - Resolved Semantic Release issues by correcting the repository URL in `package.json` and adding necessary GitHub Actions permissions.
 - Successfully published release v1.2.12 and triggered automated mobile builds.
 
+## Session: 2025-12-24
+### Completed
+- [x] Created root  directory with custom obstacle, achievement, and level examples.
+- [x] Set up  directory with screenshots extracted from E2E test snapshots.
+- [x] Created  to highlight the playable WASM (Rapier) demo and visual showcase.
+- [x] Updated  with links to the new demo and examples.
+- [x] Unified repository URLs and subpaths to  across the codebase and documentation.
+- [x] Fixed GitHub Pages deployment configuration (base URL and PWA manifest).
+
+
+## Session: 2025-12-24
+### Completed
+- [x] Created root `examples/` directory with custom obstacle, achievement, and level examples.
+- [x] Set up `showcase/` directory with screenshots extracted from E2E test snapshots.
+- [x] Created `DEMO.md` to highlight the playable WASM (Rapier) demo and visual showcase.
+- [x] Updated `README.md` with links to the new demo and examples.
+- [x] Unified repository URLs and subpaths to `nodejs-otter-river-rush` across the codebase and documentation.
+- [x] Fixed GitHub Pages deployment configuration (base URL and PWA manifest).

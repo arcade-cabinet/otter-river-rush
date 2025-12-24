@@ -39,7 +39,7 @@ Created `src/client/tests/e2e/composition.spec.ts` with 5 comprehensive tests:
 
 **Executed Real Browser Tests:**
 
-- ✅ Loaded game at http://localhost:4173/otter-river-rush/
+- ✅ Loaded game at http://localhost:4173/nodejs-otter-river-rush/
 - ✅ Verified menu displays correctly with all 4 game modes
 - ✅ Started Rapid Rush mode successfully
 - ✅ Played complete game session:
