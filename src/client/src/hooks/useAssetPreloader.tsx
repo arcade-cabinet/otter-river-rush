@@ -16,10 +16,17 @@ export function useAssetPreloader() {
 
     const loadAssets = async () => {
       try {
-        for (const url of allAssets) {
-          await useGLTF.preload(url);
-          loadedCount++;
-          setProgress((loadedCount / allAssets.length) * 100);
+        // Load in batches to avoid overwhelming the network while still being parallel
+        const batchSize = 4;
+        for (let i = 0; i < allAssets.length; i += batchSize) {
+          const batch = allAssets.slice(i, i + batchSize);
+          await Promise.all(
+            batch.map(async (url) => {
+              await useGLTF.preload(url);
+              loadedCount++;
+              setProgress((loadedCount / allAssets.length) * 100);
+            })
+          );
         }
         setLoaded(true);
       } catch (err) {

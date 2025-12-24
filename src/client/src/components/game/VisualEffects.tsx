@@ -26,16 +26,29 @@ export function VisualEffects(): React.JSX.Element {
   const coverage =
     biomeCoverage[biome.name as keyof typeof biomeCoverage] || 0.4;
 
+  const maxSteps = constraints.isPhone ? 16 : constraints.isTablet ? 32 : 64;
+
   return (
     <Atmosphere>
       <EffectComposer enableNormalPass>
         <Clouds
           qualityPreset={qualityPreset}
+          maxSteps={maxSteps}
           coverage={coverage}
           disableDefaultLayers
         >
-          <CloudLayer channel="r" altitude={750} height={650} shadow />
-          <CloudLayer channel="g" altitude={1500} height={800} shadow />
+          <CloudLayer
+            channel="r"
+            altitude={750}
+            height={650}
+            shadow={!constraints.isMobile}
+          />
+          <CloudLayer
+            channel="g"
+            altitude={1500}
+            height={800}
+            shadow={!constraints.isMobile}
+          />
           <CloudLayer
             channel="b"
             altitude={5000}

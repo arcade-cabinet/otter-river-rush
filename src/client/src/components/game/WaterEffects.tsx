@@ -3,6 +3,7 @@ import React, { useRef } from 'react';
 import { Mesh } from 'three';
 import { useBiome } from '../../ecs/biome-system';
 import { useGameStore } from '../../hooks/useGameStore';
+import { useMobileConstraints } from '../../hooks/useMobileConstraints';
 
 export function WaterEffects(): React.JSX.Element | null {
   const meshRef = useRef<Mesh>(null);
@@ -33,13 +34,16 @@ export function WaterEffects(): React.JSX.Element | null {
     }
   });
 
+  const constraints = useMobileConstraints();
+  const segments = constraints.isPhone ? 32 : constraints.isTablet ? 48 : 64;
+
   return (
     <mesh
       ref={meshRef}
       position={[0, -0.5, -1]}
       rotation={[-Math.PI / 2, 0, 0]}
     >
-      <planeGeometry args={[20, 30, 32, 32]} />
+      <planeGeometry args={[20, 30, segments, segments]} />
       <shaderMaterial
         uniforms={{
           time: { value: 0 },

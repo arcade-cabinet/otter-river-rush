@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { queries } from '../../ecs/world';
+import { useMobileConstraints } from '../../hooks/useMobileConstraints';
 
 interface Burst {
   id: number;
@@ -12,7 +13,10 @@ interface Burst {
 
 export function CollectionBurst(): React.JSX.Element {
   const [bursts, setBursts] = useState<Burst[]>([]);
+  const constraints = useMobileConstraints();
   let nextId = 0;
+
+  const particleCount = constraints.isPhone ? 4 : constraints.isTablet ? 6 : 8;
 
   useEffect(() => {
     const unsubscribe = queries.collected.onEntityAdded.subscribe((entity) => {
@@ -60,8 +64,8 @@ export function CollectionBurst(): React.JSX.Element {
             </mesh>
 
             {/* Star burst particles */}
-            {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => {
-              const angle = (Math.PI * 2 * i) / 8;
+            {Array.from({ length: particleCount }).map((_, i) => {
+              const angle = (Math.PI * 2 * i) / particleCount;
               const dist = age * 2;
               const x = Math.cos(angle) * dist;
               const y = Math.sin(angle) * dist;
