@@ -435,7 +435,7 @@
 - 🧪 Mobile device testing (community help)
 - 🍎 iOS testing and signing (requires Apple Developer account)
 
-## Recent Major Achievements (December 2024)
+## Recent Major Achievements (December 2025)
 
 ### ✅ E2E Test Fixes - CI Pipeline Recovery
 - **Game Restart Bug**: Fixed ECS world reset, complete game flow now works
