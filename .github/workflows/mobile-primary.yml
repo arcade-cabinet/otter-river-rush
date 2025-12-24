@@ -153,21 +153,19 @@ jobs:
           pnpm exec cap sync android
         working-directory: .
       
-      - name: Build Debug APK
+      - name: Setup Gradle
         uses: gradle/actions/setup-gradle@4d9f0ba0025fe599b4ebab900eb7f3a1d93ef4c2 # v5.0.0
         with:
           gradle-version: wrapper
-          arguments: assembleDebug
-          build-root-directory: android
           cache-read-only: false
 
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug
+        working-directory: android
+
       - name: Build Release APK
-        uses: gradle/actions/setup-gradle@4d9f0ba0025fe599b4ebab900eb7f3a1d93ef4c2 # v5.0.0
-        with:
-          gradle-version: wrapper
-          arguments: assembleRelease
-          build-root-directory: android
-          cache-read-only: false
+        run: ./gradlew assembleRelease
+        working-directory: android
 
       - name: Sign Release APK (if secrets available)
         if: github.event_name == 'push' && env.ANDROID_KEYSTORE_BASE64 != ''

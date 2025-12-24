@@ -278,12 +278,14 @@ jobs:
       - name: Install Android SDK components
         run: sdkmanager "platform-tools" "platforms;android-35" "build-tools;34.0.0"
       
-      - name: Build APK with Gradle
+      - name: Setup Gradle
         uses: gradle/actions/setup-gradle@4d9f0ba0025fe599b4ebab900eb7f3a1d93ef4c2 # v5.0.0
         with:
           gradle-version: wrapper
-          arguments: assembleRelease
-          build-root-directory: android
+
+      - name: Build APK with Gradle
+        run: ./gradlew assembleRelease
+        working-directory: android
 
       - name: Sign APK (if keystore provided)
         if: env.ANDROID_KEYSTORE_BASE64 != ''
