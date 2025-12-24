@@ -35,7 +35,11 @@ export function SmokeTrail({
   const constraints = useMobileConstraints();
 
   const adjustedRate = constraints.isMobile ? rate * 2 : rate;
-  const maxParticles = constraints.isPhone ? 30 : constraints.isTablet ? 60 : 100;
+  const maxParticles = constraints.isPhone
+    ? 30
+    : constraints.isTablet
+      ? 60
+      : 100;
 
   useFrame((state, delta) => {
     const time = state.clock.getElapsedTime();
