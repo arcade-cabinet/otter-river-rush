@@ -11,11 +11,58 @@ test.describe('Critical Smoke Test - Real User Flow', () => {
     page,
   }) => {
     // Navigate
+    page.on('console', (msg) => {
+      console.log(`BROWSER CONSOLE: [${msg.type()}] ${msg.text()}`);
+    });
+    page.on('pageerror', (err) => {
+      console.log(`BROWSER PAGE ERROR: ${err.message}`);
+    });
     await page.goto('/');
     await page.waitForLoadState('networkidle');
 
-    // CRITICAL: Wait for React to mount
-    await page.waitForTimeout(2000);
+    // Diagnostic: check store
+    const storeExists = await page.evaluate(
+      () => !!(window as any).__gameStore
+    );
+    console.log(`Diagnostic: __gameStore exists=${storeExists}`);
+    if (storeExists) {
+      const state = await page.evaluate(() =>
+        (window as any).__gameStore.getState()
+      );
+      console.log(`Diagnostic: Initial status=${state.status}`);
+    }
+
+    // CRITICAL: Wait for React to mount and show the menu
+    // We use a longer timeout and wait specifically for the start screen
+    const startScreen = page.locator('#startScreen');
+
+    try {
+      await startScreen.waitFor({ state: 'visible', timeout: 30000 });
+    } catch (e) {
+      // Check if there's a React mount error or crash
+      const hasContent = await page.evaluate(
+        () => document.body.textContent?.length || 0
+      );
+      const hasAppRoot = await page.evaluate(
+        () => !!document.getElementById('app')
+      );
+
+      console.log(
+        `Diagnostic: content length=${hasContent}, app root exists=${hasAppRoot}`
+      );
+
+      const hasError = await page
+        .locator('h1:has-text("Game Error")')
+        .isVisible();
+      if (hasError) {
+        const errorMsg = await page.locator('pre').textContent();
+        throw new Error(`App crashed with Error Boundary: ${errorMsg}`);
+      }
+
+      throw new Error(
+        `Timeout waiting for #startScreen. Page content: ${await page.evaluate(() => document.body.innerHTML)}`
+      );
+    }
 
     // Check React app mounted (not white screen)
     const hasContent = await page.evaluate(() => {
@@ -26,13 +73,10 @@ test.describe('Critical Smoke Test - Real User Flow', () => {
     expect(hasContent).toBe(true);
 
     // Wait for menu to be in the DOM and clickable
-    // The startScreen element might be considered "hidden" during CSS animation
-    // So we wait for the button which indicates the menu is ready
     const classicButton = page.locator('#classicButton');
     await expect(classicButton).toBeVisible({ timeout: 15000 });
 
     // Verify menu content is present
-    const startScreen = page.locator('#startScreen');
     await expect(startScreen).toContainText('Otter River Rush');
 
     // Force click with JavaScript since Playwright struggles with scroll containers

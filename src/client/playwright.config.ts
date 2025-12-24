@@ -29,7 +29,22 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        launchOptions: {
+          args: process.env['CI']
+            ? [
+                '--use-gl=angle',
+                '--use-angle=swiftshader',
+                '--enable-unsafe-swiftshader',
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage',
+                '--disable-gpu',
+              ]
+            : [],
+        },
+      },
     },
     {
       name: 'chromium-video',

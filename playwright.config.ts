@@ -1,7 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
-  testDir: './tests/e2e',
+  testDir: './src/client/tests/e2e',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0, // Reduced from 2 to 1 for speed
@@ -28,7 +28,22 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        launchOptions: {
+          args: process.env.CI
+            ? [
+                '--use-gl=angle',
+                '--use-angle=swiftshader',
+                '--enable-unsafe-swiftshader',
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage',
+                '--disable-gpu',
+              ]
+            : [],
+        },
+      },
     },
     // Only test chromium in CI for speed - others can be tested locally
     // {
