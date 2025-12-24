@@ -1,6 +1,6 @@
 # Progress - Otter River Rush
 
-**Last Updated**: December 2024  
+**Last Updated**: 2025-12-24
 **Current Version**: Alpha Plus (E2E Test Fixes Applied)  
 **Latest Session**: Major CI pipeline recovery - E2E test fixes completed ✅
 
@@ -435,7 +435,7 @@
 - 🧪 Mobile device testing (community help)
 - 🍎 iOS testing and signing (requires Apple Developer account)
 
-## Recent Major Achievements (December 2024)
+## Recent Major Achievements (December 2025)
 
 ### ✅ E2E Test Fixes - CI Pipeline Recovery
 - **Game Restart Bug**: Fixed ECS world reset, complete game flow now works
@@ -478,3 +478,8 @@
 **Major Milestones**: Document in [History](../history/)  
 **Track Active Work**: Keep [Active Context](./activeContext.md) updated  
 **Production Plan**: See [PRODUCTION_MIGRATION_PLAN.md](../implementation/PRODUCTION_MIGRATION_PLAN.md)
+
+### ✅ 2025-12-24 Updates
+- **Dependency Security**: Updated `js-yaml` to 4.1.1 to fix prototype pollution vulnerability.
+- **CI Maintenance**: Updated GitHub Actions to latest versions and pinned to exact SHAs for enhanced security.
+- **CI Fixes**: Improved Android build workflow by adding automatic Capacitor platform generation.
