@@ -2,6 +2,9 @@
   "name": "@otter-river-rush/client",
   "version": "2.0.0",
   "type": "module",
+  "sideEffects": [
+    "src/style.css"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

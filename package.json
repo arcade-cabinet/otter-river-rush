@@ -31,8 +31,27 @@
     "pipeline": "pnpm --filter dev-tools pipeline",
     "quality-check": "pnpm --filter dev-tools quality-check",
     "verify": "biome check . && pnpm --filter client type-check && pnpm --filter client test -- --run",
+    "bundle-report": "bundlesize",
     "prepare": "husky"
   },
+  "bundlesize": [
+    {
+      "path": "dist/assets/index-*.js",
+      "maxSize": "20 kB"
+    },
+    {
+      "path": "dist/assets/three-vendor-*.js",
+      "maxSize": "400 kB"
+    },
+    {
+      "path": "dist/assets/GameCanvas-*.js",
+      "maxSize": "150 kB"
+    },
+    {
+      "path": "dist/assets/postprocessing-vendor-*.js",
+      "maxSize": "40 kB"
+    }
+  ],
   "build": {
     "appId": "com.ottergames.riverrush",
     "productName": "Otter River Rush",
@@ -40,21 +59,34 @@
       "output": "dist-electron",
       "buildResources": "public"
     },
-    "files": ["dist/**/*", "wrappers/electron/**/*", "!wrappers/electron/*.ts"],
+    "files": [
+      "dist/**/*",
+      "wrappers/electron/**/*",
+      "!wrappers/electron/*.ts"
+    ],
     "extraMetadata": {
       "main": "wrappers/electron/main.js"
     },
     "mac": {
-      "target": ["dmg", "zip"],
+      "target": [
+        "dmg",
+        "zip"
+      ],
       "category": "public.app-category.games",
       "icon": "public/pwa-512x512.png"
     },
     "win": {
-      "target": ["nsis", "portable"],
+      "target": [
+        "nsis",
+        "portable"
+      ],
       "icon": "public/pwa-512x512.png"
     },
     "linux": {
-      "target": ["AppImage", "deb"],
+      "target": [
+        "AppImage",
+        "deb"
+      ],
       "category": "Game",
       "icon": "public/pwa-512x512.png"
     },
@@ -82,6 +114,7 @@
     "@vitest/ui": "^4.0.16",
     "ai": "^5.0.115",
     "autoprefixer": "^10.4.23",
+    "bundlesize": "^0.18.2",
     "concurrently": "^9.2.1",
     "daisyui": "^5.5.14",
     "electron": "^39.2.7",
