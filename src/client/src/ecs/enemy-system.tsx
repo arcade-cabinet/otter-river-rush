@@ -1,6 +1,7 @@
 import { useFrame } from '@react-three/fiber';
 import { ENEMY_DEFINITIONS } from '../game/data/enemy-definitions';
 import { useGameStore } from '../hooks/useGameStore';
+import { getModelPath } from '../utils/assets';
 import { queries, world } from './world';
 
 const enemyEntities = queries.enemies || world.with('enemy');
@@ -85,7 +86,7 @@ function spawnEnemy(enemyId: string, lane: -1 | 0 | 1) {
       lastAction: 0,
     },
     model: {
-      url: `/nodejs-otter-river-rush/models/enemy-${enemyId}.glb`, // Would need models
+      url: getModelPath(`enemy-${enemyId}.glb`),
       scale: definition.visual.size,
     },
   });

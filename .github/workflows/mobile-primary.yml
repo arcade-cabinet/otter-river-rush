@@ -150,9 +150,9 @@ jobs:
           if [ ! -d "android" ]; then
             pnpm exec cap add android
           fi
-          # Clear compressed files from public directory to avoid Android resource merger duplicates
-          find src/client/public -name "*.gz" -delete
-          find src/client/public -name "*.br" -delete
+          # Clear compressed files from dist directory to avoid Android resource merger duplicates
+          find dist -name "*.gz" -delete
+          find dist -name "*.br" -delete
           pnpm exec cap sync android
         working-directory: .
       
