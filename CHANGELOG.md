@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.13](https://github.com/jbcom/nodejs-otter-river-rush/compare/v1.2.12...v1.2.13) (2025-12-24)
+
+### 📝 Documentation
+
+* finalize session updates in memory bank ([b6fa807](https://github.com/jbcom/nodejs-otter-river-rush/commit/b6fa8071b5f8c155fbf7d6d55dc9838e156ba907))
+
 ## [1.2.12](https://github.com/jbcom/nodejs-otter-river-rush/compare/v1.2.11...v1.2.12) (2025-12-24)
 
 ### 🐛 Bug Fixes
