@@ -13,7 +13,7 @@ export function App(): React.JSX.Element {
       {status !== 'menu' && <GameCanvas showStats={import.meta.env.DEV} />}
 
       {status === 'menu' && <MainMenu />}
-      {status === 'playing' && <GameHUD />}
+      {(status === 'playing' || status === 'paused') && <GameHUD />}
       {status === 'game_over' && <GameOver />}
 
       {status === 'paused' && (

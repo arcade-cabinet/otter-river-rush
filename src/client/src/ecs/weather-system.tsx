@@ -1,7 +1,9 @@
 import { useFrame } from '@react-three/fiber';
 import React, { useRef } from 'react';
 import * as THREE from 'three';
+import { WeatherType } from '../config/biome-config';
 import { useGameStore } from '../hooks/useGameStore';
+import { useBiome } from './biome-system';
 
 interface RainDrop {
   position: THREE.Vector3;
@@ -17,40 +19,27 @@ interface SnowFlake {
   size: number;
 }
 
-type WeatherType = 'clear' | 'rain' | 'snow' | 'fog' | 'storm';
-
 /**
  * Weather System
  * Adds environmental weather effects to enhance atmosphere
  */
 export function WeatherSystem(): React.JSX.Element {
-  const { distance } = useGameStore();
+  const { status } = useGameStore();
+  const biome = useBiome();
   const rainDropsRef = useRef<RainDrop[]>([]);
   const snowFlakesRef = useRef<SnowFlake[]>([]);
   const weatherTypeRef = useRef<WeatherType>('clear');
   const lastSpawnRef = useRef(0);
 
-  // Determine weather based on distance (biome-dependent)
-  const getWeatherType = (dist: number): WeatherType => {
-    const segment = Math.floor(dist / 1000) % 4;
-
-    switch (segment) {
-      case 0:
-        return 'clear'; // Forest - clear
-      case 1:
-        return 'fog'; // Mountain - foggy
-      case 2:
-        return 'clear'; // Canyon - clear but dusty
-      case 3:
-        return 'snow'; // Crystal caves - snow/sparkles
-      default:
-        return 'clear';
-    }
-  };
-
   useFrame((state, delta) => {
+    if (status !== 'playing') {
+      rainDropsRef.current = [];
+      snowFlakesRef.current = [];
+      return;
+    }
+
     const time = state.clock.getElapsedTime();
-    const currentWeather = getWeatherType(distance);
+    const currentWeather = biome.weather;
     weatherTypeRef.current = currentWeather;
 
     // Rain system

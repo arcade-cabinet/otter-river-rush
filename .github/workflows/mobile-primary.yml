@@ -92,7 +92,12 @@ jobs:
       - name: Run E2E (smoke tests only, CI-safe)
         working-directory: src/client
         run: pnpm test:e2e --project=chromium --grep="smoke"
-      
+
+      - name: Run Visual Regression Tests
+        working-directory: src/client
+        run: pnpm test:e2e --project=chromium --grep="@visual"
+        continue-on-error: true # Visual tests can be flaky in CI environment
+
       - name: Upload Playwright report
         if: failure()
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0

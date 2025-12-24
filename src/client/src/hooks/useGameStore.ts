@@ -42,12 +42,17 @@ interface GameState {
   // High scores
   highScore: number;
 
+  // Debug/Testing
+  forcedBiome: string | null;
+
   // Actions
   startGame: (mode: GameMode) => void;
   pauseGame: () => void;
   resumeGame: () => void;
   endGame: () => void;
   returnToMenu: () => void;
+
+  setForcedBiome: (biomeId: string | null) => void;
 
   updateScore: (points: number) => void;
   updateDistance: (meters: number) => void;
@@ -93,6 +98,7 @@ export const useGameStore = create<GameState>((set, get) => ({
   musicEnabled: true,
   volume: 0.7,
   highScore: 0,
+  forcedBiome: null,
 
   // Actions
   startGame: (mode) => {
@@ -222,6 +228,8 @@ export const useGameStore = create<GameState>((set, get) => ({
     }),
 
   updateSettings: (settings) => set(() => ({ ...settings })),
+
+  setForcedBiome: (biomeId) => set({ forcedBiome: biomeId }),
 
   reset: () =>
     set({

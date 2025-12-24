@@ -34,16 +34,8 @@ export function VolumetricSky({
       ? 'medium'
       : 'high';
 
-  // Adjust coverage by biome
-  const biomeCoverage = {
-    forest: 0.3, // Light clouds
-    mountain: 0.5, // More dramatic clouds
-    canyon: 0.2, // Clear desert sky
-    rapids: 0.6, // Stormy clouds
-  };
-
-  const finalCoverage =
-    biomeCoverage[biome.name as keyof typeof biomeCoverage] || coverage;
+  // Use biome-defined coverage if not explicitly provided
+  const finalCoverage = biome.cloudCoverage ?? coverage;
 
   return (
     <Atmosphere>

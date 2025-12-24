@@ -1,0 +1,70 @@
+
+Running 4 tests using 1 worker
+
+(node:2304) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:2304) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+BROWSER [warning]: 🦦 Otter River Rush - React Three Fiber Edition
+BROWSER [warning]: 📊 Development Mode Active
+BROWSER [warning]: 🎮 Game State available at: window.__gameStore
+Forcing biome: forest
+Waiting for score HUD...
+Waiting for rendering to stabilize...
+BROWSER [warning]: [GroupMarkerNotSet(crbug.com/242999)!:A05018009C2F0000]Automatic fallback to software WebGL has been deprecated. Please use the --enable-unsafe-swiftshader (about:flags#enable-unsafe-swiftshader) flag to opt in to lower security guarantees for trusted content.
+BROWSER [warning]: [.WebGL-0xd0c00147400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+BROWSER [warning]: [.WebGL-0xd0c00147400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+BROWSER [warning]: [.WebGL-0xd0c00147400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+Taking screenshot...
+BROWSER [warning]: [.WebGL-0xd0c00147400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+  ✘  1 [chromium] › tests/e2e/biomes.spec.ts:17:5 › Biome Visual Regression › Biome: Forest Stream renders correctly (16.3s)
+(node:2392) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:2392) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+BROWSER [warning]: 🦦 Otter River Rush - React Three Fiber Edition
+BROWSER [warning]: 📊 Development Mode Active
+BROWSER [warning]: 🎮 Game State available at: window.__gameStore
+Forcing biome: mountain
+Waiting for score HUD...
+Waiting for rendering to stabilize...
+BROWSER [warning]: [GroupMarkerNotSet(crbug.com/242999)!:A0501800F41F0000]Automatic fallback to software WebGL has been deprecated. Please use the --enable-unsafe-swiftshader (about:flags#enable-unsafe-swiftshader) flag to opt in to lower security guarantees for trusted content.
+BROWSER [warning]: [.WebGL-0x23c0012f200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+BROWSER [warning]: [.WebGL-0x23c0012f200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+BROWSER [warning]: [.WebGL-0x23c0012f200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+Taking screenshot...
+BROWSER [warning]: [.WebGL-0x23c0012f200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+  ✘  2 [chromium] › tests/e2e/biomes.spec.ts:17:5 › Biome Visual Regression › Biome: Mountain Rapids renders correctly (15.8s)
+(node:2482) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:2482) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+BROWSER [warning]: 🦦 Otter River Rush - React Three Fiber Edition
+BROWSER [warning]: 📊 Development Mode Active
+BROWSER [warning]: 🎮 Game State available at: window.__gameStore
+Forcing biome: canyon
+Waiting for score HUD...
+Waiting for rendering to stabilize...
+BROWSER [warning]: [GroupMarkerNotSet(crbug.com/242999)!:A0501800640E0000]Automatic fallback to software WebGL has been deprecated. Please use the --enable-unsafe-swiftshader (about:flags#enable-unsafe-swiftshader) flag to opt in to lower security guarantees for trusted content.
+BROWSER [warning]: [.WebGL-0x34fc0014b400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+BROWSER [warning]: [.WebGL-0x34fc0014b400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+BROWSER [warning]: [.WebGL-0x34fc0014b400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+Taking screenshot...
+BROWSER [warning]: [.WebGL-0x34fc0014b400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+  ✘  3 [chromium] › tests/e2e/biomes.spec.ts:17:5 › Biome Visual Regression › Biome: Canyon River renders correctly (16.1s)
+(node:2571) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:2571) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+BROWSER [warning]: 🦦 Otter River Rush - React Three Fiber Edition
+BROWSER [warning]: 📊 Development Mode Active
+BROWSER [warning]: 🎮 Game State available at: window.__gameStore
+Forcing biome: crystal
+Waiting for score HUD...
+Waiting for rendering to stabilize...
+BROWSER [warning]: [GroupMarkerNotSet(crbug.com/242999)!:A05018008C340000]Automatic fallback to software WebGL has been deprecated. Please use the --enable-unsafe-swiftshader (about:flags#enable-unsafe-swiftshader) flag to opt in to lower security guarantees for trusted content.
+BROWSER [warning]: [.WebGL-0x21c00132000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+BROWSER [warning]: [.WebGL-0x21c00132000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+BROWSER [warning]: [.WebGL-0x21c00132000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+Taking screenshot...
+BROWSER [warning]: [.WebGL-0x21c00132000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)

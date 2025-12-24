@@ -17,14 +17,7 @@ export function VisualEffects(): React.JSX.Element {
       ? 'medium'
       : 'high';
 
-  const biomeCoverage = {
-    'Forest Stream': 0.3,
-    'Mountain Rapids': 0.5,
-    'Canyon River': 0.2,
-    'Crystal Falls': 0.6,
-  };
-  const coverage =
-    biomeCoverage[biome.name as keyof typeof biomeCoverage] || 0.4;
+  const coverage = biome.cloudCoverage;
 
   return (
     <Atmosphere>

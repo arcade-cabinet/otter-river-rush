@@ -1,25 +1,19 @@
 import { useFrame } from '@react-three/fiber';
 import React, { useRef } from 'react';
-import { Mesh } from 'three';
+import * as THREE from 'three';
 import { useBiome } from '../../ecs/biome-system';
 import { useGameStore } from '../../hooks/useGameStore';
 
 export function WaterEffects(): React.JSX.Element | null {
-  const meshRef = useRef<Mesh>(null);
+  const meshRef = useRef<THREE.Mesh>(null);
   const { status } = useGameStore();
   const biome = useBiome();
 
-  // Biome-specific water colors
-  const waterColors = {
-    forest: [0.1, 0.3, 0.5], // Deep blue-green
-    mountain: [0.15, 0.4, 0.7], // Clear mountain water
-    canyon: [0.2, 0.3, 0.4], // Murky desert water
-    rapids: [0.05, 0.2, 0.4], // Dark turbulent water
-  };
-
-  const waterColor = waterColors[biome.name as keyof typeof waterColors] || [
-    0.1, 0.2, 0.7,
-  ];
+  // Convert hex color to RGB for shader
+  const waterColor = React.useMemo(() => {
+    const color = new THREE.Color(biome.waterColor);
+    return [color.r, color.g, color.b];
+  }, [biome.waterColor]);
 
   useFrame((_, dt) => {
     if (!meshRef.current || status !== 'playing') return;

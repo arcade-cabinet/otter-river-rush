@@ -49,17 +49,15 @@ function TerrainMesh(): React.JSX.Element {
 
   // Get texture paths for current biome (for future PBR implementation)
   const texturePaths = useMemo(() => {
-    const biomeTextures = {
+    const biomeTextures: Record<string, { id: string }> = {
       forest: AMBIENT_CG_TEXTURES.GRASS,
       mountain: AMBIENT_CG_TEXTURES.ROCK_GRANITE,
       canyon: AMBIENT_CG_TEXTURES.SAND,
-      rapids: AMBIENT_CG_TEXTURES.ROCK_RIVER,
+      crystal: AMBIENT_CG_TEXTURES.ROCK_MOSSY, // Using mossy for crystal as a placeholder
     };
-    const texture =
-      biomeTextures[biome.name as keyof typeof biomeTextures] ||
-      AMBIENT_CG_TEXTURES.GRASS;
+    const texture = biomeTextures[biome.id] || AMBIENT_CG_TEXTURES.GRASS;
     return getLocalTexturePaths(texture.id, '1K', 'jpg');
-  }, [biome.name]);
+  }, [biome.id]);
 
   // TODO: Load PBR textures using texturePaths when texture loading is optimized
   // For now using simple material fallback to avoid loading hangs
@@ -88,7 +86,7 @@ function TerrainMesh(): React.JSX.Element {
     plane.rotateX(-Math.PI / 2);
 
     // Generate heightmap
-    const seed = biome.name
+    const seed = biome.id
       .split('')
       .reduce((acc, char) => acc + char.charCodeAt(0), 0);
     const hm = generateHeightmap(width, height, 3.0, seed);
