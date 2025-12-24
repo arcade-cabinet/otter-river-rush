@@ -205,3 +205,6 @@
 - Merged PR #37: Bump `js-yaml` from 4.1.0 to 4.1.1 (Security fix for prototype pollution).
 - Verified that lint, type-check, and unit tests pass locally on these branches before merging.
 - CI failures in PRs were identified as pre-existing issues in the CI environment (e.g., Capacitor sync missing Android platform) or transient issues, rather than being caused by the updates themselves.
+- Audited all GitHub Actions, updated to latest versions, and pinned to exact SHAs for enhanced security.
+- Fixed Android build CI by adding automatic Capacitor platform generation.
+

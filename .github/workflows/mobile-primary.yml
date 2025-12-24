@@ -24,7 +24,7 @@ jobs:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       
       - name: Setup pnpm
-        uses: pnpm/action-setup@9fd676a19091d4595eefd76e4bd31c97133911f1 # v4.2.0
+        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
         with:
           version: 10
       
@@ -62,12 +62,12 @@ jobs:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       
       - name: Setup Chrome
-        uses: browser-actions/setup-chrome@2dbff04819ebbfd5c974947148805a825b8a07fd # v2.1.0
+        uses: browser-actions/setup-chrome@b94431e051d1c52dcbe9a7092a4f10f827795416 # v2.1.0
         with:
           chrome-version: stable
       
       - name: Setup pnpm
-        uses: pnpm/action-setup@9fd676a19091d4595eefd76e4bd31c97133911f1 # v4.2.0
+        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
         with:
           version: 10
       
@@ -110,7 +110,7 @@ jobs:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       
       - name: Setup pnpm
-        uses: pnpm/action-setup@9fd676a19091d4595eefd76e4bd31c97133911f1 # v4.2.0
+        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
         with:
           version: 10
       
@@ -145,29 +145,33 @@ jobs:
       - name: Install Android SDK components
         run: sdkmanager "platform-tools" "platforms;android-35" "build-tools;34.0.0"
       
-      - name: Capacitor sync
-        run: pnpm exec cap sync android
+      - name: Capacitor add/sync
+        run: |
+          if [ ! -d "android" ]; then
+            pnpm exec cap add android
+          fi
+          pnpm exec cap sync android
         working-directory: .
       
       - name: Build Debug APK
-        uses: gradle/actions/setup-gradle@f236b35da9d031e13b1005234ebe4392ed54c580 # v5.0.0
+        uses: gradle/actions/setup-gradle@4d9f0ba0025fe599b4ebab900eb7f3a1d93ef4c2 # v5.0.0
         with:
           gradle-version: wrapper
           arguments: assembleDebug
           build-root-directory: android
           cache-read-only: false
-      
+
       - name: Build Release APK
-        uses: gradle/actions/setup-gradle@f236b35da9d031e13b1005234ebe4392ed54c580 # v5.0.0
+        uses: gradle/actions/setup-gradle@4d9f0ba0025fe599b4ebab900eb7f3a1d93ef4c2 # v5.0.0
         with:
           gradle-version: wrapper
           arguments: assembleRelease
           build-root-directory: android
           cache-read-only: false
-      
+
       - name: Sign Release APK (if secrets available)
         if: github.event_name == 'push' && env.ANDROID_KEYSTORE_BASE64 != ''
-        uses: r0adkll/sign-android-release@dbeba6b98a60b0fd540c02443c7f428cdedf0e7f # v1.0.4
+        uses: r0adkll/sign-android-release@349ebdef58775b1e0d8099458af0816dc79b6407 # v1
         with:
           releaseDirectory: android/app/build/outputs/apk/release
           signingKeyBase64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
