@@ -27,6 +27,7 @@ import { LaneMarkers } from './LaneMarkers';
 import { River } from './River';
 import { Skybox } from './Skybox';
 import { VisualEffects } from './VisualEffects';
+import { AudioEnvironment } from './AudioEnvironment';
 
 interface GameCanvasProps {
   showStats?: boolean;
@@ -123,6 +124,7 @@ export function GameCanvas({
           <EnemySystem />
         </Suspense>
 
+        <AudioEnvironment />
         <VisualEffects />
         {showStats && <Stats />}
       </Canvas>

@@ -115,6 +115,7 @@ pnpm exec electron-builder --dir
 - **18 GLB models** - Characters, obstacles, collectibles (91 MB)
 - **11 animations** - Full otter animation set
 - **4 PBR texture sets** - AmbientCG (grass, rock, sand, river)
+- **Audio Assets** - OGG format ambient loops and SFX
 
 ---
 
@@ -216,11 +217,27 @@ const material = usePBRMaterial({
 });
 ```
 
-**Biome-Specific Materials:**
+### Biome-Specific Materials:
 - Forest → Grass (Grass001)
 - Mountain → Granite (Rock024)
 - Canyon → Sand (Ground037)
 - Rapids → River Rocks (Rock022)
+
+---
+
+## 🔊 Audio Pipeline
+
+### Ambient & Weather System
+The game features a dynamic audio environment that responds to biomes and weather conditions:
+- **Biomes**: Each biome has a unique ambient loop (Forest, Mountain, Canyon, Rapids).
+- **Weather**: Dynamic SFX for rain, wind, and thunder that transition with the weather system.
+- **Graceful Fallback**: The audio system is designed to handle missing assets gracefully, logging warnings without interrupting gameplay.
+
+### Audio Generation Process
+1. **Sourcing**: Use royalty-free OGG files from sources like [Sonniss GDC Bundles](https://sonniss.com/gameaudiogdc) or [Kenney](https://kenney.nl/assets/category:Audio).
+2. **Processing**: Ensure all files are in `.ogg` format for optimal compression and web compatibility.
+3. **Looping**: Ambient tracks should be seamless loops (manually trimmed or using metadata).
+4. **Integration**: Place assets in `src/client/public/audio/ambient/` or `src/client/public/audio/sfx/`.
 
 ---
 
