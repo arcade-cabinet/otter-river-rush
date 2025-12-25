@@ -1,26 +1,50 @@
-import React, { Suspense, lazy } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { useGameStore } from '../hooks/useGameStore';
 import { ErrorBoundary } from './ErrorBoundary';
 
 // Lazy load game and UI components for better bundle splitting
-const GameCanvas = lazy(() => import('./game/GameCanvas').then(m => ({ default: m.GameCanvas })));
-const GameHUD = lazy(() => import('./ui/GameHUD').then(m => ({ default: m.GameHUD })));
-const GameOver = lazy(() => import('./ui/GameOver').then(m => ({ default: m.GameOver })));
-const MainMenu = lazy(() => import('./ui/MainMenu').then(m => ({ default: m.MainMenu })));
+const GameCanvas = lazy(() =>
+  import('./game/GameCanvas').then((m) => ({ default: m.GameCanvas }))
+);
+const GameHUD = lazy(() =>
+  import('./ui/GameHUD').then((m) => ({ default: m.GameHUD }))
+);
+const GameOver = lazy(() =>
+  import('./ui/GameOver').then((m) => ({ default: m.GameOver }))
+);
+const MainMenu = lazy(() =>
+  import('./ui/MainMenu').then((m) => ({ default: m.MainMenu }))
+);
 
 export function App(): React.JSX.Element {
   const { status } = useGameStore();
 
   return (
     <div className="fixed inset-0 w-screen h-screen">
-      <ErrorBoundary fallback={<div className="fixed inset-0 bg-slate-900 flex items-center justify-center text-white p-4 text-center">
-        <h2 className="text-2xl font-bold mb-4">Something went wrong</h2>
-        <p className="mb-4">We're having trouble loading the game. This might be due to a poor network connection.</p>
-        <button onClick={() => window.location.reload()} className="otter-btn otter-btn-primary">
-          Reload Page
-        </button>
-      </div>}>
-        <Suspense fallback={<div className="fixed inset-0 bg-slate-900 flex items-center justify-center text-white">Loading...</div>}>
+      <ErrorBoundary
+        fallback={
+          <div className="fixed inset-0 bg-slate-900 flex items-center justify-center text-white p-4 text-center">
+            <h2 className="text-2xl font-bold mb-4">Something went wrong</h2>
+            <p className="mb-4">
+              We're having trouble loading the game. This might be due to a poor
+              network connection.
+            </p>
+            <button
+              onClick={() => window.location.reload()}
+              className="otter-btn otter-btn-primary"
+            >
+              Reload Page
+            </button>
+          </div>
+        }
+      >
+        <Suspense
+          fallback={
+            <div className="fixed inset-0 bg-slate-900 flex items-center justify-center text-white">
+              Loading...
+            </div>
+          }
+        >
           {status !== 'menu' && <GameCanvas showStats={import.meta.env.DEV} />}
 
           {status === 'menu' && <MainMenu />}

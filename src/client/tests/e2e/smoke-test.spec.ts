@@ -12,9 +12,11 @@ test.describe('Critical Smoke Test - Real User Flow', () => {
   }) => {
     // Navigate
     page.on('console', (msg) => {
+      // biome-ignore lint/suspicious/noConsole: Intentional logging for CI debugging
       console.log(`BROWSER CONSOLE: [${msg.type()}] ${msg.text()}`);
     });
     page.on('pageerror', (err) => {
+      // biome-ignore lint/suspicious/noConsole: Intentional logging for CI debugging
       console.log(`BROWSER PAGE ERROR: ${err.message}`);
     });
     await page.goto('/');
@@ -24,11 +26,13 @@ test.describe('Critical Smoke Test - Real User Flow', () => {
     const storeExists = await page.evaluate(
       () => !!(window as any).__gameStore
     );
+    // biome-ignore lint/suspicious/noConsole: Intentional logging for CI debugging
     console.log(`Diagnostic: __gameStore exists=${storeExists}`);
     if (storeExists) {
       const state = await page.evaluate(() =>
         (window as any).__gameStore.getState()
       );
+      // biome-ignore lint/suspicious/noConsole: Intentional logging for CI debugging
       console.log(`Diagnostic: Initial status=${state.status}`);
     }
 
@@ -38,7 +42,7 @@ test.describe('Critical Smoke Test - Real User Flow', () => {
 
     try {
       await startScreen.waitFor({ state: 'visible', timeout: 30000 });
-    } catch (e) {
+    } catch (_e) {
       // Check if there's a React mount error or crash
       const hasContent = await page.evaluate(
         () => document.body.textContent?.length || 0
@@ -47,6 +51,7 @@ test.describe('Critical Smoke Test - Real User Flow', () => {
         () => !!document.getElementById('app')
       );
 
+      // biome-ignore lint/suspicious/noConsole: Intentional logging for CI debugging
       console.log(
         `Diagnostic: content length=${hasContent}, app root exists=${hasAppRoot}`
       );
