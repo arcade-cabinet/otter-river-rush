@@ -49,7 +49,8 @@ function AnimatedModel({
     () => (anim?.animations ? anim.animations : []),
     [anim]
   );
-  const { actions } = useAnimations(clips, groupRef);
+  // biome-ignore lint/suspicious/noExplicitAny: bypass three types version mismatch
+  const { actions } = useAnimations(clips, groupRef as any);
 
   useEffect(() => {
     // Stop all current actions

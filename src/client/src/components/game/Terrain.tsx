@@ -113,8 +113,10 @@ function TerrainMesh(): React.JSX.Element {
   return (
     <mesh
       ref={meshRef}
-      geometry={geometry}
-      material={material}
+      // biome-ignore lint/suspicious/noExplicitAny: bypass three types version mismatch
+      geometry={geometry as any}
+      // biome-ignore lint/suspicious/noExplicitAny: bypass three types version mismatch
+      material={material as any}
       position={[0, -0.6, 0]}
       receiveShadow
     />

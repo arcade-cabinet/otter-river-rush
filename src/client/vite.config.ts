@@ -101,7 +101,7 @@ export default defineConfig({
       open: false,
       gzipSize: true,
       brotliSize: true,
-    }) as PluginOption,
+    }) as unknown as PluginOption,
   ],
   build: {
     target: 'es2020',

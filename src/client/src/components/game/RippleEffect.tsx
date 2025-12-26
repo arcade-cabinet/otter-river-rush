@@ -72,7 +72,7 @@ export function RippleEffect({
         return (
           <mesh
             key={i}
-            position={ripple.position}
+            position={[ripple.position.x, ripple.position.y, ripple.position.z]}
             rotation={[-Math.PI / 2, 0, 0]}
           >
             <ringGeometry args={[ripple.radius * 0.9, ripple.radius, 32]} />

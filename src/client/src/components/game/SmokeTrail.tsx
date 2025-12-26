@@ -92,7 +92,11 @@ export function SmokeTrail({
       {particlesRef.current.map((particle, i) => (
         <sprite
           key={i}
-          position={particle.position}
+          position={[
+            particle.position.x,
+            particle.position.y,
+            particle.position.z,
+          ]}
           scale={[particle.size, particle.size, 1]}
         >
           <spriteMaterial

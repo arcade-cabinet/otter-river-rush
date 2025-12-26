@@ -135,7 +135,10 @@ export function WeatherSystem(): React.JSX.Element {
     <group>
       {/* Rain particles */}
       {rainDropsRef.current.map((drop, i) => (
-        <mesh key={`rain-${i}`} position={drop.position}>
+        <mesh
+          key={`rain-${i}`}
+          position={[drop.position.x, drop.position.y, drop.position.z]}
+        >
           <cylinderGeometry args={[0.01, 0.01, 0.3, 4]} />
           <meshBasicMaterial
             color="#aaccff"
@@ -150,7 +153,7 @@ export function WeatherSystem(): React.JSX.Element {
       {snowFlakesRef.current.map((flake, i) => (
         <sprite
           key={`snow-${i}`}
-          position={flake.position}
+          position={[flake.position.x, flake.position.y, flake.position.z]}
           scale={[flake.size, flake.size, 1]}
         >
           <spriteMaterial

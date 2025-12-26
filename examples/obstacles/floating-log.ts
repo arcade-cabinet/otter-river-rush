@@ -4,14 +4,15 @@ import { EnemyDefinition } from '../../src/client/src/game/data/enemy-definition
 
 /**
  * Example: Custom Floating Log Obstacle
- * 
+ *
  * This example shows how to define a new obstacle for the Otter River Rush game.
  * Obstacles are defined as 'enemies' with specific behaviors and stats.
  */
 export const FLOATING_LOG: EnemyDefinition = {
   id: 'floating-log-example',
   name: 'Mossy Floating Log',
-  description: 'A heavy, mossy log that floats slowly downstream. It is easy to spot but hard to move.',
+  description:
+    'A heavy, mossy log that floats slowly downstream. It is easy to spot but hard to move.',
   behaviors: {
     primary: 'Wander',
     secondary: 'ObstacleAvoidance',
