@@ -14,10 +14,10 @@ importers:
     devDependencies:
       '@ai-sdk/anthropic':
         specifier: ^2.0.56
-        version: 2.0.56(zod@4.1.12)
+        version: 2.0.56(zod@4.2.1)
       '@ai-sdk/openai':
         specifier: ^3.0.1
-        version: 3.0.1(zod@4.1.12)
+        version: 3.0.1(zod@4.2.1)
       '@biomejs/biome':
         specifier: ^2.3.10
         version: 2.3.10
@@ -68,7 +68,7 @@ importers:
         version: 4.0.16(vitest@4.0.16)
       ai:
         specifier: ^5.0.115
-        version: 5.0.115(zod@4.1.12)
+        version: 5.0.115(zod@4.2.1)
       autoprefixer:
         specifier: ^10.4.23
         version: 10.4.23(postcss@8.5.6)
@@ -95,7 +95,7 @@ importers:
         version: 16.2.7
       openai:
         specifier: ^6.14.0
-        version: 6.14.0(ws@8.18.3)(zod@4.1.12)
+        version: 6.14.0(ws@8.18.3)(zod@4.2.1)
       playwright:
         specifier: ^1.57.0
         version: 1.57.0
@@ -252,7 +252,7 @@ importers:
         version: 3.3.2
       openai:
         specifier: ^6.7.0
-        version: 6.9.0(ws@8.18.3)(zod@4.1.12)
+        version: 6.9.0(ws@8.18.3)(zod@4.2.1)
       ora:
         specifier: ^9.0.0
         version: 9.0.0
@@ -260,8 +260,8 @@ importers:
         specifier: ^0.34.4
         version: 0.34.5
       zod:
-        specifier: ^4.0.0
-        version: 4.1.12
+        specifier: ^4.2.1
+        version: 4.2.1
     devDependencies:
       '@types/fs-extra':
         specifier: ^11.0.4
@@ -6426,8 +6426,8 @@ packages:
   yuka@0.7.8:
     resolution: {integrity: sha512-G/pFcMZh2Azz7Yy500NSV1jQ0Ru7h9hTNyEW+HjRXcdzjJIyp/3mCGspnx7VJVP06zxORqK6mkl5TywLqVUnVg==}
 
-  zod@4.1.12:
-    resolution: {integrity: sha512-JInaHOamG8pt5+Ey8kGmdcAcg3OL9reK8ltczgHTAwNhMys/6ThXHityHxVV2p3fkw/c+MAvBHFVYHFZDmjMCQ==}
+  zod@4.2.1:
+    resolution: {integrity: sha512-0wZ1IRqGGhMP76gLqz8EyfBXKk0J2qo2+H3fi4mcUP/KtTocoX08nmIAHl1Z2kJIZbZee8KOpBCSNPRgauucjw==}
 
   zundo@2.3.0:
     resolution: {integrity: sha512-4GXYxXA17SIKYhVbWHdSEU04P697IMyVGXrC2TnzoyohEAWytFNOKqOp5gTGvaW93F/PM5Y0evbGtOPF0PWQwQ==}
@@ -6482,38 +6482,38 @@ snapshots:
 
   '@acemir/cssom@0.9.29': {}
 
-  '@ai-sdk/anthropic@2.0.56(zod@4.1.12)':
+  '@ai-sdk/anthropic@2.0.56(zod@4.2.1)':
     dependencies:
       '@ai-sdk/provider': 2.0.0
-      '@ai-sdk/provider-utils': 3.0.19(zod@4.1.12)
-      zod: 4.1.12
+      '@ai-sdk/provider-utils': 3.0.19(zod@4.2.1)
+      zod: 4.2.1
 
-  '@ai-sdk/gateway@2.0.22(zod@4.1.12)':
+  '@ai-sdk/gateway@2.0.22(zod@4.2.1)':
     dependencies:
       '@ai-sdk/provider': 2.0.0
-      '@ai-sdk/provider-utils': 3.0.19(zod@4.1.12)
+      '@ai-sdk/provider-utils': 3.0.19(zod@4.2.1)
       '@vercel/oidc': 3.0.5
-      zod: 4.1.12
+      zod: 4.2.1
 
-  '@ai-sdk/openai@3.0.1(zod@4.1.12)':
+  '@ai-sdk/openai@3.0.1(zod@4.2.1)':
     dependencies:
       '@ai-sdk/provider': 3.0.0
-      '@ai-sdk/provider-utils': 4.0.1(zod@4.1.12)
-      zod: 4.1.12
+      '@ai-sdk/provider-utils': 4.0.1(zod@4.2.1)
+      zod: 4.2.1
 
-  '@ai-sdk/provider-utils@3.0.19(zod@4.1.12)':
+  '@ai-sdk/provider-utils@3.0.19(zod@4.2.1)':
     dependencies:
       '@ai-sdk/provider': 2.0.0
       '@standard-schema/spec': 1.1.0
       eventsource-parser: 3.0.6
-      zod: 4.1.12
+      zod: 4.2.1
 
-  '@ai-sdk/provider-utils@4.0.1(zod@4.1.12)':
+  '@ai-sdk/provider-utils@4.0.1(zod@4.2.1)':
     dependencies:
       '@ai-sdk/provider': 3.0.0
       '@standard-schema/spec': 1.1.0
       eventsource-parser: 3.0.6
-      zod: 4.1.12
+      zod: 4.2.1
 
   '@ai-sdk/provider@2.0.0':
     dependencies:
@@ -8917,13 +8917,13 @@ snapshots:
       clean-stack: 2.2.0
       indent-string: 4.0.0
 
-  ai@5.0.115(zod@4.1.12):
+  ai@5.0.115(zod@4.2.1):
     dependencies:
-      '@ai-sdk/gateway': 2.0.22(zod@4.1.12)
+      '@ai-sdk/gateway': 2.0.22(zod@4.2.1)
       '@ai-sdk/provider': 2.0.0
-      '@ai-sdk/provider-utils': 3.0.19(zod@4.1.12)
+      '@ai-sdk/provider-utils': 3.0.19(zod@4.2.1)
       '@opentelemetry/api': 1.9.0
-      zod: 4.1.12
+      zod: 4.2.1
 
   ajv-keywords@3.5.2(ajv@6.12.6):
     dependencies:
@@ -11399,15 +11399,15 @@ snapshots:
       is-docker: 2.2.1
       is-wsl: 2.2.0
 
-  openai@6.14.0(ws@8.18.3)(zod@4.1.12):
+  openai@6.14.0(ws@8.18.3)(zod@4.2.1):
     optionalDependencies:
       ws: 8.18.3
-      zod: 4.1.12
+      zod: 4.2.1
 
-  openai@6.9.0(ws@8.18.3)(zod@4.1.12):
+  openai@6.9.0(ws@8.18.3)(zod@4.2.1):
     optionalDependencies:
       ws: 8.18.3
-      zod: 4.1.12
+      zod: 4.2.1
 
   ora@5.4.1:
     dependencies:
@@ -13170,7 +13170,7 @@ snapshots:
 
   yuka@0.7.8: {}
 
-  zod@4.1.12: {}
+  zod@4.2.1: {}
 
   zundo@2.3.0(zustand@5.0.9(@types/react@19.2.7)(immer@11.0.1)(react@19.2.0)(use-sync-external-store@1.6.0(react@19.2.0))):
     dependencies:
