@@ -101,7 +101,7 @@
     "@types/three": "^0.181.0",
     "@vitest/coverage-v8": "^4.0.16",
     "@vitest/ui": "^4.0.16",
-    "ai": "^5.0.115",
+    "ai": "^6.0.3",
     "autoprefixer": "^10.4.23",
     "concurrently": "^9.2.1",
     "daisyui": "^5.5.14",
