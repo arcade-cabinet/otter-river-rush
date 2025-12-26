@@ -84,7 +84,7 @@
   },
   "devDependencies": {
     "@ai-sdk/anthropic": "^2.0.56",
-    "@ai-sdk/openai": "^2.0.88",
+    "@ai-sdk/openai": "^3.0.1",
     "@biomejs/biome": "^2.3.10",
     "@capacitor/android": "^8.0.0",
     "@capacitor/assets": "^3.0.5",
