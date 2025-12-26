@@ -23,7 +23,7 @@
     "miniplex": "^2.0.0",
     "miniplex-react": "^2.0.1",
     "postprocessing": "^6.38.2",
-    "react": "^19.2.0",
+    "react": "^19.2.3",
     "react-dom": "^19.2.0",
     "three": "^0.182.0",
     "yuka": "^0.7.8",
