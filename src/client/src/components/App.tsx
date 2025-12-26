@@ -31,6 +31,7 @@ export function App(): React.JSX.Element {
   useEffect(() => {
     let progress = 0;
     let isMounted = true;
+    let readyTimeout: NodeJS.Timeout;
 
     const interval = setInterval(() => {
       // Use smoother progress increments
@@ -42,7 +43,7 @@ export function App(): React.JSX.Element {
 
         // Small delay to ensure everything is mounted before hiding loading screen
         if (isMounted) {
-          setTimeout(() => {
+          readyTimeout = setTimeout(() => {
             if (isMounted) {
               setIsReady(true);
             }
@@ -58,6 +59,9 @@ export function App(): React.JSX.Element {
     return () => {
       isMounted = false;
       clearInterval(interval);
+      if (readyTimeout) {
+        clearTimeout(readyTimeout);
+      }
     };
   }, []);
 
@@ -67,10 +71,10 @@ export function App(): React.JSX.Element {
         fallback={
           <div className="fixed inset-0 bg-slate-900 flex flex-col items-center justify-center text-white p-4 text-center">
             <div className="text-6xl mb-4">🦦</div>
-            <h2 className="text-2xl font-bold mb-4">Something went wrong</h2>
+            <h2 className="text-2xl font-bold mb-4">⚠️ Game Error</h2>
             <p className="mb-4 text-slate-300 max-w-md">
-              We're having trouble loading the game. This might be due to a poor
-              network connection.
+              Something went wrong! We're having trouble loading the game. This
+              might be due to a poor network connection.
             </p>
             <button
               onClick={() => window.location.reload()}
@@ -81,12 +85,10 @@ export function App(): React.JSX.Element {
           </div>
         }
       >
+        {!isReady && <LoadingScreen progress={loadProgress} />}
         <Suspense fallback={<LoadingScreen progress={loadProgress} />}>
           {/* Always render GameCanvas for instant scene readiness */}
           <GameCanvas showStats={import.meta.env.DEV} />
-
-          {/* Show loading overlay until ready */}
-          {!isReady && <LoadingScreen progress={loadProgress} />}
 
           {/* UI overlays */}
           {isReady && status === 'menu' && <MainMenu />}

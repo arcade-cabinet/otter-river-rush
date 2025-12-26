@@ -51,16 +51,14 @@ export function GameCanvas({
       playerSpawnedRef.current = true; // Mark as spawned to prevent repeated spawn attempts
     }
 
-    // Reset flag when returning to menu
-    if (status === 'menu') {
+    // Reset flag when returning to menu or game over (to allow direct restart)
+    if (status === 'menu' || status === 'game_over') {
       playerSpawnedRef.current = false;
     }
   }, [status]);
 
-  // Responsive canvas sizing - use full viewport
+  // Responsive canvas sizing - use full viewport via CSS class for dvh support
   const canvasStyle: React.CSSProperties = {
-    width: '100vw',
-    height: '100dvh', // Dynamic viewport height for mobile browsers
     position: 'fixed',
     top: 0,
     left: 0,
@@ -72,7 +70,7 @@ export function GameCanvas({
   return (
     <div
       ref={canvasRef}
-      className="fixed inset-0 w-screen h-screen z-0"
+      className="game-canvas-container fixed inset-0 z-0"
       style={canvasStyle}
     >
       <Canvas

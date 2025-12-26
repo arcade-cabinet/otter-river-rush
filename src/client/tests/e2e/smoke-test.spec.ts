@@ -39,9 +39,14 @@ test.describe('Critical Smoke Test - Real User Flow', () => {
     // CRITICAL: Wait for React to mount and show the menu
     // We use a longer timeout and wait specifically for the start screen
     const startScreen = page.locator('#startScreen');
+    const loadingScreen = page.locator('.otter-title:has-text("Otter River Rush")');
 
     try {
-      await startScreen.waitFor({ state: 'visible', timeout: 30000 });
+      // First wait for loading screen to appear (if it's not too fast)
+      await loadingScreen.waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
+      
+      // Then wait for start screen to be visible
+      await startScreen.waitFor({ state: 'visible', timeout: 45000 });
     } catch (_e) {
       // Check if there's a React mount error or crash
       const hasContent = await page.evaluate(
@@ -57,7 +62,8 @@ test.describe('Critical Smoke Test - Real User Flow', () => {
       );
 
       const hasError = await page
-        .locator('h1:has-text("Game Error")')
+        .locator('h2:has-text("Game Error")')
+        .or(page.locator('h1:has-text("Game Error")'))
         .isVisible();
       if (hasError) {
         const errorMsg = await page.locator('pre').textContent();

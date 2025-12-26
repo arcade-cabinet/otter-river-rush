@@ -87,7 +87,7 @@ jobs:
         run: pnpm install --frozen-lockfile
       
       - name: Run unit tests
-        run: pnpm --filter client test -- --run
+        run: pnpm --filter client test -- tests/unit --run
       
       - name: Upload coverage
         uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
@@ -148,14 +148,18 @@ jobs:
         run: pnpm install --frozen-lockfile
       
       - name: Run integration tests
-        run: pnpm --filter client test -- --run
+        run: pnpm --filter client test -- tests/integration --run
       
       - name: Integration test summary
         run: |
-          echo "## 🧪 Integration Tests" >> $GITHUB_STEP_SUMMARY
+          echo "## 🧪 Test Results" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Core game logic verified:" >> $GITHUB_STEP_SUMMARY
+          echo "### Unit Tests" >> $GITHUB_STEP_SUMMARY
           echo "- ✅ Game state management" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Utility functions" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Asset helpers" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Integration Tests" >> $GITHUB_STEP_SUMMARY
           echo "- ✅ ECS systems (movement, collision, spawning)" >> $GITHUB_STEP_SUMMARY
           echo "- ✅ Scoring/progression logic" >> $GITHUB_STEP_SUMMARY
           echo "- ✅ Asset loading" >> $GITHUB_STEP_SUMMARY

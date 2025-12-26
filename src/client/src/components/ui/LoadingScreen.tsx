@@ -8,7 +8,9 @@ interface LoadingScreenProps {
  * LoadingScreen Component
  * Displays a progress bar and animated otter mascot during initial load
  */
-export function LoadingScreen({ progress }: LoadingScreenProps): React.JSX.Element {
+export function LoadingScreen({
+  progress,
+}: LoadingScreenProps): React.JSX.Element {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-slate-900 z-[100]">
       <div className="text-center space-y-4 px-6">

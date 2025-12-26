@@ -30,7 +30,9 @@ export function MainMenu(): React.JSX.Element {
           <h1 className="otter-title text-3xl md:text-4xl mb-2">
             Otter River Rush
           </h1>
-          <p className="text-sm text-blue-300">Swipe or use arrow keys to dodge!</p>
+          <p className="text-sm text-blue-300">
+            Swipe or use arrow keys to dodge!
+          </p>
           {highScore > 0 && (
             <p className="text-xs text-yellow-400 mt-1">
               Best Score: {highScore.toLocaleString()}
