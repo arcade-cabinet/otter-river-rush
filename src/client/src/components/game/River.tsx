@@ -1,3 +1,4 @@
+import { AdvancedWater } from '@jbcom/strata';
 import { useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
 import { Mesh } from 'three';
@@ -7,30 +8,17 @@ export function River() {
   const meshRef = useRef<Mesh>(null);
   const { status } = useGameStore();
 
-  useFrame((_, dt) => {
-    if (!meshRef.current || status !== 'playing') return;
-
-    // Scroll water texture
-    if (meshRef.current.material) {
-      const material = Array.isArray(meshRef.current.material)
-        ? meshRef.current.material[0]
-        : meshRef.current.material;
-
-      if (material && 'map' in material) {
-        const mat = material as {
-          map?: { offset: { y: number } };
-        };
-        if (mat.map) {
-          mat.map.offset.y += dt * 0.5;
-        }
-      }
-    }
-  });
-
   return (
-    <mesh ref={meshRef} position={[0, 0, -1]} rotation={[-Math.PI / 2, 0, 0]}>
-      <planeGeometry args={[20, 30]} />
-      <meshStandardMaterial color="#1e40af" metalness={0.3} roughness={0.7} />
-    </mesh>
+    <AdvancedWater
+      ref={meshRef}
+      size={[20, 30]}
+      position={[0, 0, -1]}
+      color="#1e40af"
+      deepColor="#1e3a8a"
+      foamColor="#ffffff"
+      causticIntensity={0.2}
+      waveHeight={0.1}
+      waveSpeed={status === 'playing' ? 1.5 : 0}
+    />
   );
 }
