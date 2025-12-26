@@ -1,4 +1,4 @@
-import { ProceduralSky, createTimeOfDay } from '@jbcom/strata';
+import { createTimeOfDay, ProceduralSky } from '@jbcom/strata';
 import React from 'react';
 import { useBiome } from '../../ecs/biome-system';
 import { useGameStore } from '../../hooks/useGameStore';
@@ -9,8 +9,8 @@ export function Skybox(): React.JSX.Element {
 
   return (
     <group>
-      <ProceduralSky 
-        timeOfDay={createTimeOfDay(12)} 
+      <ProceduralSky
+        timeOfDay={createTimeOfDay(12)}
         weather={{ intensity: biome.cloudCoverage ?? 0 }}
         distance={50}
       />

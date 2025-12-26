@@ -22,12 +22,12 @@ import { WeatherSystem } from '../../ecs/weather-system';
 import { queries, spawn } from '../../ecs/world';
 import { useGameStore } from '../../hooks/useGameStore';
 import { useMobileConstraints } from '../../hooks/useMobileConstraints';
+import { AudioEnvironment } from './AudioEnvironment';
 import { EntityRenderer } from './EntityRenderer';
 import { LaneMarkers } from './LaneMarkers';
 import { River } from './River';
 import { Skybox } from './Skybox';
 import { VisualEffects } from './VisualEffects';
-import { AudioEnvironment } from './AudioEnvironment';
 
 interface GameCanvasProps {
   showStats?: boolean;
