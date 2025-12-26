@@ -6,7 +6,7 @@ import viteCompression from 'vite-plugin-compression';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
-  base: '/nodejs-otter-river-rush/',
+  base: process.env.VITE_BASE_URL || '/otter-river-rush/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -36,8 +36,8 @@ export default defineConfig({
         orientation: 'portrait',
         categories: ['games', 'action'],
         lang: 'en-US',
-        start_url: '/nodejs-otter-river-rush/',
-        scope: '/nodejs-otter-river-rush/',
+        start_url: process.env.VITE_BASE_URL || '/otter-river-rush/',
+        scope: process.env.VITE_BASE_URL || '/otter-river-rush/',
         icons: [
           {
             src: 'pwa-192x192.png',
